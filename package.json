@@ -1,7 +1,7 @@
 {
-  "name": "anim",
+  "name": "Mite",
   "version": "1.0.0",
-  "description": "api de graphQl para una aplicacion de streaming de anime",
+  "description": "api de graphQl de mite una aplicacion para ver anime online",
   "main": "index.js",
   "type": "module",
   "scripts": {
