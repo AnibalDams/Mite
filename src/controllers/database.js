@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const { connect} = mongoose
+const { connect } = mongoose;
 async function _connect(mongoUri) {
   try {
     await connect(mongoUri, {

@@ -1,18 +1,18 @@
-import signUp from './methods/signUp.js'
+import signUp from "./methods/signUp.js";
 
 class User {
-    #username
-    #password
+  #username;
+  #password;
 
-    constructor(name,password){
-        this.#username = name;
-        this.#password = password
-    }
+  constructor(name, password) {
+    this.#username = name;
+    this.#password = password;
+  }
 
-    async newUser(){
-        const New = await signUp(this.#username,this.#password)
-        return New
-    }
+  async newUser() {
+    const New = await signUp(this.#username, this.#password);
+    return New;
+  }
 }
 
-export default User
+export default User;
