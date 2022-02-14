@@ -11,6 +11,8 @@ import { fileURLToPath } from "url";
 
 import newuser from "./src/mutations/newUser.js";
 import newanime from "./src/mutations/newAnime.js";
+import Login from './src/queries/login.js'
+
 
 // initializations
 
@@ -45,7 +47,7 @@ var schema = buildSchema(`
   }
 
   type Query {
-    hello: String
+    login(username:String!, password:String!): String
   }
   type Mutation {
     newUser(username: String!, password:String!, admin:Boolean): user
@@ -56,9 +58,7 @@ var schema = buildSchema(`
 
 // The root provides a resolver function for each API endpoint
 var root = {
-  hello: () => {
-    return "Hello world!";
-  },
+
   newUser: async ({ username, password, admin }) => {
     const res = await newuser(username, password, admin);
     return res;
@@ -88,6 +88,10 @@ var root = {
       Private
     );
     return New;
+  },
+  login: async ({ username, password }) => {
+    const res = await Login(username, password);
+    return res;
   },
 };
 
