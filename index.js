@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 
 //graphQl Queries and mutations imports
 
-import newUser from "./src/mutations/newUser.js";
+import newuser from "./src/mutations/newUser.js";
 import newanime from "./src/mutations/newAnime.js";
 
 // initializations
@@ -26,6 +26,7 @@ var schema = buildSchema(`
     password:String
     avatar:String
     createdAt:String
+    admin:Boolean
     _v:Int
   }
   type anime {
@@ -47,7 +48,7 @@ var schema = buildSchema(`
     hello: String
   }
   type Mutation {
-    newUser(username: String!, password:String!): user
+    newUser(username: String!, password:String!, admin:Boolean): user
     newAnime( name:String! synopsis:String! image:String! cover:String! releaseDate:String! study:String! onGoing:Boolean! genres:[String]! type:String! Private:Boolean!) : anime
   }
   
@@ -58,10 +59,11 @@ var root = {
   hello: () => {
     return "Hello world!";
   },
-  newUser: ({ username, password }) => {
-    newUser(username, password);
+  newUser: async ({ username, password, admin }) => {
+    const res = await newuser(username, password, admin);
+    return res;
   },
-  newAnime: ({
+  newAnime: async ({
     name,
     synopsis,
     image,
@@ -73,7 +75,7 @@ var root = {
     type,
     Private,
   }) => {
-    const New = newanime(
+    const New = await newanime(
       name,
       synopsis,
       image,

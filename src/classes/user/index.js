@@ -9,8 +9,9 @@ class User {
     this.#password = password;
   }
 
-  async newUser() {
-    const New = await signUp(this.#username, this.#password);
+  async newUser(admin) {
+    const New = await signUp(this.#username, this.#password, admin);
+
     return New;
   }
 }
