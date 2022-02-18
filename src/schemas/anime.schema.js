@@ -6,6 +6,7 @@ const animeSchema = new Schema({
   id: Number,
   name: String,
   synopsis: String,
+  color: String,
   image: String,
   cover: String,
   releaseDate: String,

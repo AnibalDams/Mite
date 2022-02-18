@@ -1,10 +1,12 @@
 import newAnime from "./methods/new.js";
 import FindAnime from "./staticMethods/findAnime.js";
 import SearchAnime from "./staticMethods/search.js";
+import NewEpisode from "./staticMethods/newEpisode.js";
 
 class Anime {
   #name;
   #synopsis;
+  #color;
   #image;
   #cover;
   #releaseDate;
@@ -17,6 +19,7 @@ class Anime {
   constructor(
     name,
     synopsis,
+    color,
     image,
     cover,
     releaseDate,
@@ -28,6 +31,7 @@ class Anime {
   ) {
     this.#name = name;
     this.#synopsis = synopsis;
+    this.#color = color;
     this.#image = image;
     this.#cover = cover;
     this.#releaseDate = releaseDate;
@@ -42,6 +46,7 @@ class Anime {
     const _new = newAnime(
       this.#name,
       this.#synopsis,
+      this.#color,
       this.#image,
       this.#cover,
       this.#releaseDate,
@@ -62,10 +67,21 @@ class Anime {
       throw new Error(e);
     }
   }
+
   static async search(searchIndex) {
     try {
       const Search = SearchAnime(searchIndex);
       return Search;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+
+  static async newEpisode(episodeData) {
+    try {
+      const New = NewEpisode(episodeData);
+      return New;
     } catch (e) {
       console.error(e);
       throw new Error(e);

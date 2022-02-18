@@ -14,6 +14,7 @@ import Login from "./src/queries/login.js";
 import newanime from "./src/mutations/newAnime.js";
 import newuser from "./src/mutations/newUser.js";
 import Search from "./src/queries/search.js";
+import NewEpisode from "./src/mutations/newEpisode.js";
 
 // initializations
 
@@ -36,7 +37,7 @@ var schema = buildSchema(`
   type anime {
     message:String
     id:Int
-    _id:ID 
+    _id:ID
     name:String
     synopsis:String
     image:String
@@ -49,7 +50,21 @@ var schema = buildSchema(`
     private:Boolean
     _v:Int
   }
-
+  input episodeServerInput{
+    name:String
+    url:String
+  }
+  type episodeServer{
+    name:String
+    url:String
+  }
+  type episode {
+    message:String
+    anime:String
+    episodeNumber:Int
+    episodeName:String
+    servers:[episodeServer]
+  }
   type Query {
     login(username:String!, password:String!): String
     findAnime(animeID:Int!) : anime
@@ -57,7 +72,8 @@ var schema = buildSchema(`
   }
   type Mutation {
     newUser(username: String!, password:String!, admin:Boolean): user
-    newAnime( name:String! synopsis:String! image:String! cover:String! releaseDate:String! study:String! onGoing:Boolean! genres:[String]! type:String! Private:Boolean!) : anime
+    newAnime( name:String! synopsis:String! color:String! image:String! cover:String! releaseDate:String! study:String! onGoing:Boolean! genres:[String]! type:String! Private:Boolean!) : anime
+    newEpisode(anime:String!, episodeNumber:Int!, episodeName:String, servers:[episodeServerInput]):episode
   }
   
 `);
@@ -71,6 +87,7 @@ var root = {
   newAnime: async ({
     name,
     synopsis,
+    color,
     image,
     cover,
     releaseDate,
@@ -83,6 +100,7 @@ var root = {
     const New = await newanime(
       name,
       synopsis,
+      color,
       image,
       cover,
       releaseDate,
@@ -100,6 +118,8 @@ var root = {
   },
   findAnime: async ({ animeID }) => FindAnime(animeID),
   search: async ({ anime }) => Search(anime),
+  newEpisode: async ({ anime, episodeNumber, episodeName, servers }) =>
+    NewEpisode(anime, episodeNumber, episodeName, servers),
 };
 
 var app = express();

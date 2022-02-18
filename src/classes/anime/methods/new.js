@@ -4,6 +4,7 @@ import genre from "../../../schemas/genres.schema.js";
 const newAnime = async (
   name,
   synopsis,
+  color,
   image,
   cover,
   releaseDate,
@@ -20,6 +21,7 @@ const newAnime = async (
       id,
       name,
       synopsis,
+      color,
       image,
       cover,
       releaseDate,
