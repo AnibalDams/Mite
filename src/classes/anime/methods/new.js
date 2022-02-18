@@ -14,7 +14,10 @@ const newAnime = async (
   Private
 ) => {
   try {
+    const find = await anime.find();
+    const id = find.length;
     const Anime = new anime({
+      id,
       name,
       synopsis,
       image,

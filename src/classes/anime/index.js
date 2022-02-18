@@ -1,4 +1,6 @@
 import newAnime from "./methods/new.js";
+import FindAnime from "./staticMethods/findAnime.js";
+import SearchAnime from "./staticMethods/search.js";
 
 class Anime {
   #name;
@@ -50,6 +52,24 @@ class Anime {
       this.#private
     );
     return _new;
+  }
+  static async findAnime(animeId) {
+    try {
+      const find = await FindAnime(animeId);
+      return find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+  static async search(searchIndex) {
+    try {
+      const Search = SearchAnime(searchIndex);
+      return Search;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
   }
 }
 

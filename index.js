@@ -9,10 +9,11 @@ import { fileURLToPath } from "url";
 
 //graphQl Queries and mutations imports
 
-import newuser from "./src/mutations/newUser.js";
+import FindAnime from "./src/queries/findAnime.js";
+import Login from "./src/queries/login.js";
 import newanime from "./src/mutations/newAnime.js";
-import Login from './src/queries/login.js'
-
+import newuser from "./src/mutations/newUser.js";
+import Search from "./src/queries/search.js";
 
 // initializations
 
@@ -23,6 +24,7 @@ const __dirname = path.dirname(__filename);
 var schema = buildSchema(`
   type user {
     message:String
+
     _id:ID
     username:String
     password:String
@@ -32,6 +34,8 @@ var schema = buildSchema(`
     _v:Int
   }
   type anime {
+    message:String
+    id:Int
     _id:ID 
     name:String
     synopsis:String
@@ -48,6 +52,8 @@ var schema = buildSchema(`
 
   type Query {
     login(username:String!, password:String!): String
+    findAnime(animeID:Int!) : anime
+    search(anime:String!): [anime]
   }
   type Mutation {
     newUser(username: String!, password:String!, admin:Boolean): user
@@ -58,7 +64,6 @@ var schema = buildSchema(`
 
 // The root provides a resolver function for each API endpoint
 var root = {
-
   newUser: async ({ username, password, admin }) => {
     const res = await newuser(username, password, admin);
     return res;
@@ -93,6 +98,8 @@ var root = {
     const res = await Login(username, password);
     return res;
   },
+  findAnime: async ({ animeID }) => FindAnime(animeID),
+  search: async ({ anime }) => Search(anime),
 };
 
 var app = express();
