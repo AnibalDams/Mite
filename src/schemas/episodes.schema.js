@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { model, Schema } = mongoose;
 
 const episodeSchema = new Schema({
-  anime: String,
+  anime: Number,
   episodeNumber: Number,
   thumbnail:String,
   episodeName: { type: String, default: "" },

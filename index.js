@@ -11,6 +11,8 @@ import { fileURLToPath } from "url";
 
 import FindAll from "./src/queries/findAll.js";
 import FindAnime from "./src/queries/findAnime.js";
+import FindEpisode from "./src/queries/findEpisode.js";
+import FindEpisodes from "./src/queries/findEpisodes.js";
 import Login from "./src/queries/login.js";
 import newanime from "./src/mutations/newAnime.js";
 import newuser from "./src/mutations/newUser.js";
@@ -55,25 +57,27 @@ var schema = buildSchema(`
     private:Boolean
     _v:Int
   }
-  input episodeServerInput{
-    name:String
-    url:String
-  }
   type episodeServer{
     name:String
     url:String
   }
   type episode {
     message:String
-    anime:String
+    anime:Int
     episodeNumber:Int
     thumbnail:String
     episodeName:String
     servers:[episodeServer]
   }
+  input episodeServerInput{
+    name:String
+    url:String
+  }
   type Query {
     findAll(page:Int!, limit:Int!):[anime]
     findAnime(animeID:Int!) : anime
+    findEpisode(animeID:Int!, episode:Int!):episode
+    findEpisodes(animeID:Int!):[episode]
     login(username:String!, password:String!): String
     search(anime:String!): [anime]
     totalPagination(animesPerPage:Int!):Int
@@ -81,7 +85,7 @@ var schema = buildSchema(`
   type Mutation {
     newUser(username: String!, password:String!, admin:Boolean): user
     newAnime( name:String! synopsis:String! color:String! image:String! cover:String! releaseDate:String! study:String! onGoing:Boolean! genres:[String]! type:String! Private:Boolean!) : anime
-    newEpisode(anime:String!, episodeNumber:Int!,thumbnail:String!, episodeName:String, servers:[episodeServerInput]):episode
+    newEpisode(anime:Int!, episodeNumber:Int!,thumbnail:String!, episodeName:String, servers:[episodeServerInput]):episode
   }
   
 `);
@@ -90,7 +94,8 @@ var schema = buildSchema(`
 var root = {
   findAll: async ({ page,limit }) => FindAll(page,limit),
   findAnime: async ({ animeID }) => FindAnime(animeID),
-  
+  findEpisode:async ({animeID,episode})=>FindEpisode(animeID,episode),
+  findEpisodes:async ({animeID})=>FindEpisodes(animeID),
   login: async ({ username, password }) => {
     const res = await Login(username, password);
     return res;

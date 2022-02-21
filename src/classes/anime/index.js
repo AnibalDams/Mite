@@ -1,5 +1,7 @@
 import Find from './staticMethods/find.js'
 import FindAnime from "./staticMethods/findAnime.js";
+import FindEpisode from "./staticMethods/findEpisode.js";
+import FindEpisodes from "./staticMethods/findEpisodes.js";
 import newAnime from "./methods/new.js";
 import NewEpisode from "./staticMethods/newEpisode.js";
 import SearchAnime from "./staticMethods/search.js";
@@ -80,6 +82,25 @@ class Anime {
     }
   }
 
+  static async findEpisode(animeId,episode) {
+    try {
+      const find = await FindEpisode(animeId,episode);
+      return find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+
+  static async findEpisodes(animeId) {
+    try {
+      const find = await FindEpisodes(animeId);
+      return find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
   static async newEpisode(episodeData) {
     try {
       const New = NewEpisode(episodeData);
