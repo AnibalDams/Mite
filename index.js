@@ -9,12 +9,17 @@ import { fileURLToPath } from "url";
 
 //graphQl Queries and mutations imports
 
+import FindAll from "./src/queries/findAll.js";
 import FindAnime from "./src/queries/findAnime.js";
 import Login from "./src/queries/login.js";
 import newanime from "./src/mutations/newAnime.js";
 import newuser from "./src/mutations/newUser.js";
 import Search from "./src/queries/search.js";
 import NewEpisode from "./src/mutations/newEpisode.js";
+
+// other
+
+import anime from './src/schemas/anime.schema.js'
 
 // initializations
 
@@ -62,24 +67,35 @@ var schema = buildSchema(`
     message:String
     anime:String
     episodeNumber:Int
+    thumbnail:String
     episodeName:String
     servers:[episodeServer]
   }
   type Query {
-    login(username:String!, password:String!): String
+    findAll(page:Int!, limit:Int!):[anime]
     findAnime(animeID:Int!) : anime
+    login(username:String!, password:String!): String
     search(anime:String!): [anime]
+    totalPagination(animesPerPage:Int!):Int
   }
   type Mutation {
     newUser(username: String!, password:String!, admin:Boolean): user
     newAnime( name:String! synopsis:String! color:String! image:String! cover:String! releaseDate:String! study:String! onGoing:Boolean! genres:[String]! type:String! Private:Boolean!) : anime
-    newEpisode(anime:String!, episodeNumber:Int!, episodeName:String, servers:[episodeServerInput]):episode
+    newEpisode(anime:String!, episodeNumber:Int!,thumbnail:String!, episodeName:String, servers:[episodeServerInput]):episode
   }
   
 `);
 
 // The root provides a resolver function for each API endpoint
 var root = {
+  findAll: async ({ page,limit }) => FindAll(page,limit),
+  findAnime: async ({ animeID }) => FindAnime(animeID),
+  
+  login: async ({ username, password }) => {
+    const res = await Login(username, password);
+    return res;
+  },
+
   newUser: async ({ username, password, admin }) => {
     const res = await newuser(username, password, admin);
     return res;
@@ -110,16 +126,15 @@ var root = {
       type,
       Private
     );
-    return New;
-  },
-  login: async ({ username, password }) => {
-    const res = await Login(username, password);
-    return res;
-  },
-  findAnime: async ({ animeID }) => FindAnime(animeID),
+    return New;},
   search: async ({ anime }) => Search(anime),
-  newEpisode: async ({ anime, episodeNumber, episodeName, servers }) =>
-    NewEpisode(anime, episodeNumber, episodeName, servers),
+  newEpisode: async ({ anime, episodeNumber,thumbnail, episodeName, servers }) => NewEpisode(anime, episodeNumber,thumbnail, episodeName, servers),
+  totalPagination:async ({animesPerPage})=> {
+    const animes = await anime.find()
+
+    return Math.floor(animes.length / animesPerPage)
+
+  }
 };
 
 var app = express();
@@ -127,6 +142,16 @@ var app = express();
 // middlewares
 
 app.use(cors());
+app.use('*',(req,res,next)=>{
+  console.log(req.headers.origin)
+  if(req.headers.origin !== "http://localhost:4000"){
+    console.log(`ajfodsfd ${req.headers.origin}`)
+  }else {
+    console.log('hola')
+
+  }
+  next()
+})
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/img", express.static(path.join(__dirname, "/src/public/img")));

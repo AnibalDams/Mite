@@ -16,6 +16,7 @@ const animeSchema = new Schema({
   type: String,
   private: Boolean,
   visits: { type: Number, default: 0 },
+  
 });
 
 export default model("anime", animeSchema);

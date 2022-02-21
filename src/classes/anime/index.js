@@ -1,7 +1,10 @@
-import newAnime from "./methods/new.js";
+import Find from './staticMethods/find.js'
 import FindAnime from "./staticMethods/findAnime.js";
-import SearchAnime from "./staticMethods/search.js";
+import newAnime from "./methods/new.js";
 import NewEpisode from "./staticMethods/newEpisode.js";
+import SearchAnime from "./staticMethods/search.js";
+
+
 
 class Anime {
   #name;
@@ -58,10 +61,29 @@ class Anime {
     );
     return _new;
   }
+  static async find(page,limit) {
+    try {
+      const _find = await Find(page,limit);
+      return _find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
   static async findAnime(animeId) {
     try {
       const find = await FindAnime(animeId);
       return find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+
+  static async newEpisode(episodeData) {
+    try {
+      const New = NewEpisode(episodeData);
+      return New;
     } catch (e) {
       console.error(e);
       throw new Error(e);
@@ -78,15 +100,6 @@ class Anime {
     }
   }
 
-  static async newEpisode(episodeData) {
-    try {
-      const New = NewEpisode(episodeData);
-      return New;
-    } catch (e) {
-      console.error(e);
-      throw new Error(e);
-    }
-  }
 }
 
 export default Anime;
