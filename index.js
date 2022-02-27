@@ -11,6 +11,7 @@ import { fileURLToPath } from "url";
 
 import FindAll from "./src/queries/findAll.js";
 import FindAnime from "./src/queries/findAnime.js";
+import FindAnimeByGenre from "./src/queries/findAnimeByGenre.js";
 import FindEpisode from "./src/queries/findEpisode.js";
 import FindEpisodes from "./src/queries/findEpisodes.js";
 import Login from "./src/queries/login.js";
@@ -18,10 +19,11 @@ import newanime from "./src/mutations/newAnime.js";
 import newuser from "./src/mutations/newUser.js";
 import Search from "./src/queries/search.js";
 import NewEpisode from "./src/mutations/newEpisode.js";
+import MostPopularAnime from "./src/queries/mostPopularAnime.js";
 
 // other
 
-import anime from './src/schemas/anime.schema.js'
+import anime from "./src/schemas/anime.schema.js";
 
 // initializations
 
@@ -32,7 +34,6 @@ const __dirname = path.dirname(__filename);
 var schema = buildSchema(`
   type user {
     message:String
-
     _id:ID
     username:String
     password:String
@@ -55,6 +56,7 @@ var schema = buildSchema(`
     genres:[String]
     type:String
     private:Boolean
+    views:Int
     _v:Int
   }
   type episodeServer{
@@ -76,9 +78,11 @@ var schema = buildSchema(`
   type Query {
     findAll(page:Int!, limit:Int!):[anime]
     findAnime(animeID:Int!) : anime
+    findAnimeByGenre(genre:String!):[anime]
     findEpisode(animeID:Int!, episode:Int!):episode
     findEpisodes(animeID:Int!):[episode]
     login(username:String!, password:String!): String
+    mostPopularAnime: [anime]
     search(anime:String!): [anime]
     totalPagination(animesPerPage:Int!):Int
   }
@@ -92,10 +96,11 @@ var schema = buildSchema(`
 
 // The root provides a resolver function for each API endpoint
 var root = {
-  findAll: async ({ page,limit }) => FindAll(page,limit),
+  findAll: async ({ page, limit }) => FindAll(page, limit),
   findAnime: async ({ animeID }) => FindAnime(animeID),
-  findEpisode:async ({animeID,episode})=>FindEpisode(animeID,episode),
-  findEpisodes:async ({animeID})=>FindEpisodes(animeID),
+  findAnimeByGenre: async ({ genre }) => FindAnimeByGenre(genre),
+  findEpisode: async ({ animeID, episode }) => FindEpisode(animeID, episode),
+  findEpisodes: async ({ animeID }) => FindEpisodes(animeID),
   login: async ({ username, password }) => {
     const res = await Login(username, password);
     return res;
@@ -131,15 +136,22 @@ var root = {
       type,
       Private
     );
-    return New;},
+    return New;
+  },
+  mostPopularAnime: async () => await MostPopularAnime(),
   search: async ({ anime }) => Search(anime),
-  newEpisode: async ({ anime, episodeNumber,thumbnail, episodeName, servers }) => NewEpisode(anime, episodeNumber,thumbnail, episodeName, servers),
-  totalPagination:async ({animesPerPage})=> {
-    const animes = await anime.find()
+  newEpisode: async ({
+    anime,
+    episodeNumber,
+    thumbnail,
+    episodeName,
+    servers,
+  }) => NewEpisode(anime, episodeNumber, thumbnail, episodeName, servers),
+  totalPagination: async ({ animesPerPage }) => {
+    const animes = await anime.find();
 
-    return Math.floor(animes.length / animesPerPage)
-
-  }
+    return Math.floor(animes.length / animesPerPage);
+  },
 };
 
 var app = express();
@@ -147,16 +159,15 @@ var app = express();
 // middlewares
 
 app.use(cors());
-app.use('*',(req,res,next)=>{
-  console.log(req.headers.origin)
-  if(req.headers.origin !== "http://localhost:4000"){
-    console.log(`ajfodsfd ${req.headers.origin}`)
-  }else {
-    console.log('hola')
-
+app.use("*", (req, res, next) => {
+  console.log(req.headers.origin);
+  if (req.headers.origin !== "http://localhost:4000") {
+    console.log(`ajfodsfd ${req.headers.origin}`);
+  } else {
+    console.log("hola");
   }
-  next()
-})
+  next();
+});
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/img", express.static(path.join(__dirname, "/src/public/img")));

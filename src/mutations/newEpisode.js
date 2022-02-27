@@ -1,6 +1,12 @@
 import Anime from "../classes/anime/index.js";
 
-const newEpisode = async (anime, episodeNumber,thumbnail, episodeName, servers) => {
+const newEpisode = async (
+  anime,
+  episodeNumber,
+  thumbnail,
+  episodeName,
+  servers
+) => {
   try {
     const New = await Anime.newEpisode({
       anime,

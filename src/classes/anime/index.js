@@ -1,12 +1,13 @@
-import Find from './staticMethods/find.js'
+import Find from "./staticMethods/find.js";
 import FindAnime from "./staticMethods/findAnime.js";
+import FindAnimeByGenre from "./staticMethods/findAnimeByGenre.js";
+
 import FindEpisode from "./staticMethods/findEpisode.js";
 import FindEpisodes from "./staticMethods/findEpisodes.js";
 import newAnime from "./methods/new.js";
 import NewEpisode from "./staticMethods/newEpisode.js";
+import MostPopularAnime from "./staticMethods/mostPopularAnime.js";
 import SearchAnime from "./staticMethods/search.js";
-
-
 
 class Anime {
   #name;
@@ -63,9 +64,9 @@ class Anime {
     );
     return _new;
   }
-  static async find(page,limit) {
+  static async find(page, limit) {
     try {
-      const _find = await Find(page,limit);
+      const _find = await Find(page, limit);
       return _find;
     } catch (e) {
       console.error(e);
@@ -81,10 +82,19 @@ class Anime {
       throw new Error(e);
     }
   }
-
-  static async findEpisode(animeId,episode) {
+    static async findAnimeByGenre(genre) {
     try {
-      const find = await FindEpisode(animeId,episode);
+      const find = await FindAnimeByGenre(genre);
+      return find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+
+  static async findEpisode(animeId, episode) {
+    try {
+      const find = await FindEpisode(animeId, episode);
       return find;
     } catch (e) {
       console.error(e);
@@ -111,6 +121,15 @@ class Anime {
     }
   }
 
+  static async mostPopularAnime() {
+    try {
+      const mostPopular = MostPopularAnime();
+      return mostPopular;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
   static async search(searchIndex) {
     try {
       const Search = SearchAnime(searchIndex);
@@ -120,7 +139,6 @@ class Anime {
       throw new Error(e);
     }
   }
-
 }
 
 export default Anime;

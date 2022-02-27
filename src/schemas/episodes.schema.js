@@ -5,7 +5,7 @@ const { model, Schema } = mongoose;
 const episodeSchema = new Schema({
   anime: Number,
   episodeNumber: Number,
-  thumbnail:String,
+  thumbnail: String,
   episodeName: { type: String, default: "" },
   servers: [{ name: String, url: String }],
 });

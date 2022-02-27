@@ -1,8 +1,8 @@
 import Anime from "../classes/anime/index.js";
 
-const findEpisode = async (animeId, episode) => {
+const mostPopularAnime = async () => {
   try {
-    const find = await Anime.findEpisode(animeId, episode);
+    const find = await Anime.mostPopularAnime();
     return find;
   } catch (e) {
     console.error(e);
@@ -10,4 +10,4 @@ const findEpisode = async (animeId, episode) => {
   }
 };
 
-export default findEpisode;
+export default mostPopularAnime;

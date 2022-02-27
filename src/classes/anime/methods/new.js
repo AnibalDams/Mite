@@ -16,7 +16,7 @@ const newAnime = async (
 ) => {
   try {
     const find = await anime.find();
-    const id = find.length;
+    const id = find.length === 0 ? 1 : find.length + 1;
     const Anime = new anime({
       id,
       name,

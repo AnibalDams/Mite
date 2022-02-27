@@ -1,8 +1,8 @@
 import Anime from "../classes/anime/index.js";
 
-const findAll = async (page,limit) => {
+const findAll = async (page, limit) => {
   try {
-    const find = await Anime.find(page,limit);
+    const find = await Anime.find(page, limit);
     return find;
   } catch (e) {
     console.error(e);
