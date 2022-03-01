@@ -1,4 +1,4 @@
-import User from "../classes/user/index.js";
+import User from '../classes/user/index.js';
 
 const login = async (username, password) => {
   try {

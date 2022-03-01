@@ -1,5 +1,5 @@
-import signUp from "./methods/signUp.js";
-import Login from "./staticMethods/login.js";
+import signUp from './methods/signUp.js';
+import _login from './staticMethods/login.js';
 
 class User {
   #username;
@@ -16,8 +16,8 @@ class User {
     return New;
   }
   static async login(username, password) {
-    const _login = await Login(username, password);
-    return _login;
+    const __login = await _login(username, password);
+    return __login;
   }
 }
 

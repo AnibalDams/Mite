@@ -1,4 +1,4 @@
-import episode from "../../../schemas/episodes.schema.js";
+import episode from '../../../schemas/episodes.schema.js';
 
 const findEpisode = async (animeID, _episode) => {
   try {
@@ -9,7 +9,7 @@ const findEpisode = async (animeID, _episode) => {
     if (find) {
       return find;
     } else {
-      return { message: "No se encontro ningun episodio" };
+      return {message: 'No se encontro ningun episodio'};
     }
   } catch (e) {
     console.error(e);

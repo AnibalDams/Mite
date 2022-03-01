@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-const { connect } = mongoose;
+import mongoose from 'mongoose';
+const {connect} = mongoose;
 async function _connect(mongoUri) {
   try {
     await connect(mongoUri, {
@@ -7,7 +7,7 @@ async function _connect(mongoUri) {
 
       useUnifiedTopology: true,
     });
-    console.log("> DB is connected :D");
+    console.log('> DB is connected :D');
   } catch (error) {
     console.error(error);
   }

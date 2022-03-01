@@ -1,13 +1,14 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const { model, Schema } = mongoose;
+const {model, Schema} = mongoose;
 
 const episodeSchema = new Schema({
   anime: Number,
   episodeNumber: Number,
   thumbnail: String,
-  episodeName: { type: String, default: "" },
-  servers: [{ name: String, url: String }],
+  episodeName: {type: String, default: ''},
+  servers: [{name: String, url: String}],
+  uploadedAt: {type: Date, default: Date.now},
 });
 
-export default model("episode", episodeSchema);
+export default model('episode', episodeSchema);

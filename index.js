@@ -1,29 +1,31 @@
-import express from "express";
-import { graphqlHTTP } from "express-graphql";
-import { buildSchema } from "graphql";
-import dotenv from "dotenv";
-import connect from "./src/controllers/database.js";
-import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
+import express from 'express';
+import {graphqlHTTP} from 'express-graphql';
+import {buildSchema} from 'graphql';
+import dotenv from 'dotenv';
+import connect from './src/controllers/database.js';
+// import cors from 'cors';
+import path from 'path';
+import {fileURLToPath} from 'url';
 
-//graphQl Queries and mutations imports
+// graphQl Queries and mutations imports
 
-import FindAll from "./src/queries/findAll.js";
-import FindAnime from "./src/queries/findAnime.js";
-import FindAnimeByGenre from "./src/queries/findAnimeByGenre.js";
-import FindEpisode from "./src/queries/findEpisode.js";
-import FindEpisodes from "./src/queries/findEpisodes.js";
-import Login from "./src/queries/login.js";
-import newanime from "./src/mutations/newAnime.js";
-import newuser from "./src/mutations/newUser.js";
-import Search from "./src/queries/search.js";
-import NewEpisode from "./src/mutations/newEpisode.js";
-import MostPopularAnime from "./src/queries/mostPopularAnime.js";
+import _findAll from './src/queries/findAll.js';
+import _findAnime from './src/queries/findAnime.js';
+import _findAnimeByGenre from './src/queries/findAnimeByGenre.js';
+import _findEpisode from './src/queries/findEpisode.js';
+import _findEpisodes from './src/queries/findEpisodes.js';
+import _latestAnimesAdded from './src/queries/latestAnimesAdded.js';
+import _latestEpisodesAdded from './src/queries/latestEpisodesAdded.js';
+import _login from './src/queries/login.js';
+import newanime from './src/mutations/newAnime.js';
+import newuser from './src/mutations/newUser.js';
+import _search from './src/queries/search.js';
+import _newEpisode from './src/mutations/newEpisode.js';
+import _mostPopularAnime from './src/queries/mostPopularAnime.js';
 
 // other
 
-import anime from "./src/schemas/anime.schema.js";
+import anime from './src/schemas/anime.schema.js';
 
 // initializations
 
@@ -31,7 +33,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-var schema = buildSchema(`
+const schema = buildSchema(`
   type user {
     message:String
     _id:ID
@@ -70,6 +72,7 @@ var schema = buildSchema(`
     thumbnail:String
     episodeName:String
     servers:[episodeServer]
+    uploadedAt:String
   }
   input episodeServerInput{
     name:String
@@ -81,6 +84,8 @@ var schema = buildSchema(`
     findAnimeByGenre(genre:String!):[anime]
     findEpisode(animeID:Int!, episode:Int!):episode
     findEpisodes(animeID:Int!):[episode]
+    latestAnimesAdded:[anime]
+    latestEpisodesAdded:[episode]
     login(username:String!, password:String!): String
     mostPopularAnime: [anime]
     search(anime:String!): [anime]
@@ -88,25 +93,43 @@ var schema = buildSchema(`
   }
   type Mutation {
     newUser(username: String!, password:String!, admin:Boolean): user
-    newAnime( name:String! synopsis:String! color:String! image:String! cover:String! releaseDate:String! study:String! onGoing:Boolean! genres:[String]! type:String! Private:Boolean!) : anime
-    newEpisode(anime:Int!, episodeNumber:Int!,thumbnail:String!, episodeName:String, servers:[episodeServerInput]):episode
+    newAnime( 
+      name:String!, 
+      synopsis:String!, 
+      color:String!, 
+      image:String!, 
+      cover:String!, 
+      releaseDate:String!, 
+      study:String!, 
+      onGoing:Boolean!, 
+      genres:[String]!, 
+      type:String!, 
+      Private:Boolean!) : anime
+    newEpisode(
+      anime:Int!, 
+      episodeNumber:Int!,
+      thumbnail:String!, 
+      episodeName:String, 
+      servers:[episodeServerInput]):episode
   }
   
 `);
 
 // The root provides a resolver function for each API endpoint
-var root = {
-  findAll: async ({ page, limit }) => FindAll(page, limit),
-  findAnime: async ({ animeID }) => FindAnime(animeID),
-  findAnimeByGenre: async ({ genre }) => FindAnimeByGenre(genre),
-  findEpisode: async ({ animeID, episode }) => FindEpisode(animeID, episode),
-  findEpisodes: async ({ animeID }) => FindEpisodes(animeID),
-  login: async ({ username, password }) => {
-    const res = await Login(username, password);
+const root = {
+  findAll: ({page, limit}) => _findAll(page, limit),
+  findAnime: ({animeID}) => _findAnime(animeID),
+  findAnimeByGenre: ({genre}) => _findAnimeByGenre(genre),
+  findEpisode: ({animeID, episode}) => _findEpisode(animeID, episode),
+  findEpisodes: ({animeID}) => _findEpisodes(animeID),
+  latestAnimesAdded: ()=> _latestAnimesAdded(),
+  latestEpisodesAdded: ()=> _latestEpisodesAdded(),
+  login: async ({username, password}) => {
+    const res = await _login(username, password);
     return res;
   },
 
-  newUser: async ({ username, password, admin }) => {
+  newUser: async ({username, password, admin}) => {
     const res = await newuser(username, password, admin);
     return res;
   },
@@ -124,65 +147,66 @@ var root = {
     Private,
   }) => {
     const New = await newanime(
-      name,
-      synopsis,
-      color,
-      image,
-      cover,
-      releaseDate,
-      study,
-      onGoing,
-      genres,
-      type,
-      Private
+        name,
+        synopsis,
+        color,
+        image,
+        cover,
+        releaseDate,
+        study,
+        onGoing,
+        genres,
+        type,
+        Private,
     );
     return New;
   },
-  mostPopularAnime: async () => await MostPopularAnime(),
-  search: async ({ anime }) => Search(anime),
+  mostPopularAnime: async () => await _mostPopularAnime(),
+  search: async ({anime}) => _search(anime),
   newEpisode: async ({
     anime,
     episodeNumber,
     thumbnail,
     episodeName,
     servers,
-  }) => NewEpisode(anime, episodeNumber, thumbnail, episodeName, servers),
-  totalPagination: async ({ animesPerPage }) => {
+  }) => _newEpisode(anime, episodeNumber, thumbnail, episodeName, servers),
+  totalPagination: async ({animesPerPage}) => {
     const animes = await anime.find();
 
     return Math.floor(animes.length / animesPerPage);
   },
 };
 
-var app = express();
+const app = express();
 
 // middlewares
 
-app.use(cors());
-app.use("*", (req, res, next) => {
+// app.use(cors());
+
+/* app.use('*', (req, res, next) => {
   console.log(req.headers.origin);
-  if (req.headers.origin !== "http://localhost:4000") {
+  if (req.headers.origin !== 'http://localhost:4000') {
     console.log(`ajfodsfd ${req.headers.origin}`);
   } else {
-    console.log("hola");
+    console.log('hola');
   }
   next();
-});
-app.use(express.urlencoded({ extended: false }));
+});*/
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use("/img", express.static(path.join(__dirname, "/src/public/img")));
+app.use('/img', express.static(path.join(__dirname, '/src/public/img')));
 app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    rootValue: root,
+    '/graphql',
+    graphqlHTTP({
+      schema: schema,
+      rootValue: root,
 
-    graphiql: true,
-  })
+      graphiql: true,
+    }),
 );
 
 // server
 connect(process.env.MONGO_URI);
 
 app.listen(4000);
-console.log("server running on localhost:4000");
+console.log('server running on localhost:4000');

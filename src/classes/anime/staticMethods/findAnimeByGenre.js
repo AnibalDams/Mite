@@ -1,8 +1,8 @@
-import anime from "../../../schemas/anime.schema.js";
+import anime from '../../../schemas/anime.schema.js';
 
 const findAnimeByGenre = async (genre) => {
   try {
-    const allAnimes = await anime.find({ private: false });
+    const allAnimes = await anime.find({private: false});
     const animesWithThisGenre = [];
     for (let i = 0; i < allAnimes.length; i++) {
       const Anime = allAnimes[i];
@@ -16,7 +16,7 @@ const findAnimeByGenre = async (genre) => {
     if (animesWithThisGenre.length > 0) {
       return animesWithThisGenre;
     } else {
-      return [{ message: "No se encontro ningun anime con este genero" }];
+      return [{message: 'No se encontro ningun anime con este genero'}];
     }
   } catch (e) {
     console.error(e);
@@ -24,5 +24,4 @@ const findAnimeByGenre = async (genre) => {
   }
 };
 
-
-export default findAnimeByGenre; 
+export default findAnimeByGenre;

@@ -1,8 +1,9 @@
 import Anime from '../classes/anime/index.js';
 
-const findAll = async (page, limit) => {
+
+const latestEpisodesAdded = async () => {
   try {
-    const find = await Anime.find(page, limit);
+    const find = await Anime.latestEpisodesAdded();
     return find;
   } catch (e) {
     console.error(e);
@@ -10,4 +11,4 @@ const findAll = async (page, limit) => {
   }
 };
 
-export default findAll;
+export default latestEpisodesAdded;

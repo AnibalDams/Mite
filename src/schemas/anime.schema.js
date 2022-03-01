@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const { model, Schema } = mongoose;
+const {model, Schema} = mongoose;
 
 const animeSchema = new Schema({
   id: Number,
@@ -11,11 +11,13 @@ const animeSchema = new Schema({
   cover: String,
   releaseDate: String,
   study: String,
-  onGoing: { type: Boolean },
+  onGoing: {type: Boolean},
   genres: [String],
   type: String,
   private: Boolean,
-  views: { type: Number, default: 0 },
+  views: {type: Number, default: 0},
+  uploadedAt: {type: Date, default: Date.now},
+
 });
 
-export default model("anime", animeSchema);
+export default model('anime', animeSchema);

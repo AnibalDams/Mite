@@ -1,13 +1,13 @@
-import anime from "../../../schemas/anime.schema.js";
+import anime from '../../../schemas/anime.schema.js';
 
 const find = async (page, limit) => {
   const skipIndex = (page - 1) * limit;
   try {
     const animes = await anime
-      .find({ private: false })
-      .sort({ releaseDate: -1 })
-      .limit(limit)
-      .skip(skipIndex);
+        .find({private: false})
+        .sort({releaseDate: -1})
+        .limit(limit)
+        .skip(skipIndex);
 
     return animes;
   } catch (e) {

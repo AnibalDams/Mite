@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const { model, Schema } = mongoose;
+const {model, Schema} = mongoose;
 
 const favoriteAnimeSchema = new Schema({
   idAnime: String,
@@ -11,4 +11,4 @@ const favoriteAnimeSchema = new Schema({
   user: String,
 });
 
-export default model("favoriteAnime", favoriteAnimeSchema);
+export default model('favoriteAnime', favoriteAnimeSchema);

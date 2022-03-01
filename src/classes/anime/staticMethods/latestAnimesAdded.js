@@ -1,9 +1,8 @@
 import anime from '../../../schemas/anime.schema.js';
 
-const mostPopularAnime = async () => {
+const latestAnimesAdded = async () => {
   try {
-    const animes = await anime.find().sort({views: -1}).limit(15);
-
+    const animes = await anime.find().sort({uploadedAt: -1}).limit(15);
     return animes;
   } catch (e) {
     console.error(e);
@@ -11,4 +10,5 @@ const mostPopularAnime = async () => {
   }
 };
 
-export default mostPopularAnime;
+
+export default latestAnimesAdded;

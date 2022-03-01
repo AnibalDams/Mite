@@ -1,4 +1,4 @@
-import Anime from "../classes/anime/index.js";
+import Anime from '../classes/anime/index.js';
 
 const findAnime = async (animeID) => {
   try {

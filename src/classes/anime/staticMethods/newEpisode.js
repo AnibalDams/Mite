@@ -1,8 +1,8 @@
-import episode from "../../../schemas/episodes.schema.js";
+import Episode from '../../../schemas/episodes.schema.js';
 
 async function newEpisode(episodeData) {
   try {
-    const _episode = new episode(episodeData);
+    const _episode = new Episode(episodeData);
     await _episode.save();
     return _episode;
   } catch (e) {
