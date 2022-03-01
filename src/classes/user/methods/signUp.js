@@ -4,7 +4,7 @@ import User from '../../../schemas/user.schema.js';
 
 const signUp = async (username, password, admin) => {
   try {
-    const userWithSameUsername = await user.findOne({username});
+    const userWithSameUsername = await User.findOne({username});
     const _username = username;
     if (userWithSameUsername) {
       return {
