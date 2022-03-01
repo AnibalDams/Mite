@@ -3,7 +3,7 @@ import {graphqlHTTP} from 'express-graphql';
 import {buildSchema} from 'graphql';
 import dotenv from 'dotenv';
 import connect from './src/controllers/database.js';
-// import cors from 'cors';
+ import cors from 'cors';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
@@ -181,7 +181,7 @@ const app = express();
 
 // middlewares
 
-// app.use(cors());
+ app.use(cors());
 
 /* app.use('*', (req, res, next) => {
   console.log(req.headers.origin);
