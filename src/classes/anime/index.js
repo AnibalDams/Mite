@@ -70,8 +70,8 @@ class Anime {
 
   static async find(page, limit) {
     try {
-      const _find = await _find(page, limit);
-      return _find;
+      const Find = await _find(page, limit);
+      return Find;
     } catch (e) {
       console.error(e);
       throw new Error(e);
