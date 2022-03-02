@@ -208,5 +208,5 @@ app.use(
 // server
 connect(process.env.MONGO_URI);
 
-app.listen(4000);
+app.listen(process.env.PORT);
 console.log('server running on localhost:4000');
