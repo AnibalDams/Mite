@@ -7,7 +7,7 @@ import connect from './src/controllers/database.js';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
-// graphQl Queries and mutations imports
+// graphQl Queries and mutations imports.
 
 import _findAll from './src/queries/findAll.js';
 import _findAnime from './src/queries/findAnime.js';
