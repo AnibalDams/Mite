@@ -15,7 +15,7 @@ const newAnime = async (
     Private,
 ) => {
   try {
-    const find = await anime.find();
+    const find = await Anime.find();
     const id = find.length === 0 ? 1 : find.length + 1;
     const _anime = new Anime({
       id,
@@ -32,9 +32,9 @@ const newAnime = async (
       private: Private,
     });
     genres.forEach(async (el) => {
-      const findGenre = await genre.findOne({genre: el});
+      const findGenre = await Genre.findOne({genre: el});
       if (findGenre) {
-        await genre.findByIdAndUpdate(findGenre._id, {
+        await Genre.findByIdAndUpdate(findGenre._id, {
           $inc: {
             animes: 1,
           },
@@ -48,7 +48,7 @@ const newAnime = async (
     return _anime;
   } catch (e) {
     console.error(e);
-    throw new Error(error);
+    throw new Error(e);
   }
 };
 

@@ -13,6 +13,7 @@ import _findAnime from './src/queries/findAnime.js';
 import _findAnimeByGenre from './src/queries/findAnimeByGenre.js';
 import _findEpisode from './src/queries/findEpisode.js';
 import _findEpisodes from './src/queries/findEpisodes.js';
+import _findGenres from './src/queries/findGenres.js';
 import _findUser from './src/queries/findUser.js';
 import _latestAnimesAdded from './src/queries/latestAnimesAdded.js';
 import _latestEpisodesAdded from './src/queries/latestEpisodesAdded.js';
@@ -45,6 +46,9 @@ const schema = buildSchema(`
     createdAt:String
     
     _v:Int
+  }
+  type genres{
+    genre:String
   }
   type anime {
     message:String
@@ -86,6 +90,7 @@ const schema = buildSchema(`
     findAnimeByGenre(genre:String!):[anime]
     findEpisode(animeID:Int!, episode:Int!):episode
     findEpisodes(animeID:Int!):[episode]
+    findGenres:[genres]
     findUser(username:String!):user
     latestAnimesAdded:[anime]
     latestEpisodesAdded:[episode]
@@ -125,6 +130,7 @@ const root = {
   findAnimeByGenre: ({genre}) => _findAnimeByGenre(genre),
   findEpisode: ({animeID, episode}) => _findEpisode(animeID, episode),
   findEpisodes: ({animeID}) => _findEpisodes(animeID),
+  findGenres: () => _findGenres(),
   findUser: ({username}) => _findUser(username),
   latestAnimesAdded: ()=> _latestAnimesAdded(),
   latestEpisodesAdded: ()=> _latestEpisodesAdded(),

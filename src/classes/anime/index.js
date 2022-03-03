@@ -4,6 +4,7 @@ import _findAnimeByGenre from './staticMethods/findAnimeByGenre.js';
 
 import _findEpisode from './staticMethods/findEpisode.js';
 import _findEpisodes from './staticMethods/findEpisodes.js';
+import _findGenres from './staticMethods/findGenres.js';
 import _latestAnimesAdded from './staticMethods/latestAnimesAdded.js';
 import _latestEpisodesAdded from './staticMethods/latestEpisodesAdded.js';
 import newAnime from './methods/new.js';
@@ -115,9 +116,18 @@ class Anime {
       throw new Error(e);
     }
   }
+    static async findGenres() {
+    try {
+      const find = await _findGenres();
+      return find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
 
 
-  static async latestAnimesAdded() {
+  static latestAnimesAdded() {
     try {
       const latestAdded = _latestAnimesAdded();
       return latestAdded;
@@ -127,7 +137,7 @@ class Anime {
     }
   }
 
-  static async latestEpisodesAdded() {
+  static latestEpisodesAdded() {
     try {
       const latestAdded = _latestEpisodesAdded();
       return latestAdded;
@@ -136,7 +146,7 @@ class Anime {
       throw new Error(e);
     }
   }
-  static async newEpisode(episodeData) {
+  static newEpisode(episodeData) {
     try {
       const New = _newEpisode(episodeData);
       return New;
@@ -146,7 +156,7 @@ class Anime {
     }
   }
 
-  static async mostPopularAnime() {
+  static mostPopularAnime() {
     try {
       const mostPopular = _mostPopularAnime();
       return mostPopular;
@@ -155,7 +165,7 @@ class Anime {
       throw new Error(e);
     }
   }
-  static async search(searchIndex) {
+  static search(searchIndex) {
     try {
       const Search = _searchAnime(searchIndex);
       return Search;
