@@ -1,9 +1,8 @@
 import express from 'express';
 import {graphqlHTTP} from 'express-graphql';
 import {buildSchema} from 'graphql';
-import dotenv from 'dotenv';
 import connect from './src/controllers/database.js';
- import cors from 'cors';
+import cors from 'cors';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
@@ -14,6 +13,7 @@ import _findAnime from './src/queries/findAnime.js';
 import _findAnimeByGenre from './src/queries/findAnimeByGenre.js';
 import _findEpisode from './src/queries/findEpisode.js';
 import _findEpisodes from './src/queries/findEpisodes.js';
+import _findUser from './src/queries/findUser.js';
 import _latestAnimesAdded from './src/queries/latestAnimesAdded.js';
 import _latestEpisodesAdded from './src/queries/latestEpisodesAdded.js';
 import _login from './src/queries/login.js';
@@ -32,16 +32,18 @@ import anime from './src/schemas/anime.schema.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const port = process.env.PORT || 4000;
+
 
 const schema = buildSchema(`
   type user {
     message:String
     _id:ID
     username:String
-    password:String
+    
     avatar:String
     createdAt:String
-    admin:Boolean
+    
     _v:Int
   }
   type anime {
@@ -84,6 +86,7 @@ const schema = buildSchema(`
     findAnimeByGenre(genre:String!):[anime]
     findEpisode(animeID:Int!, episode:Int!):episode
     findEpisodes(animeID:Int!):[episode]
+    findUser(username:String!):user
     latestAnimesAdded:[anime]
     latestEpisodesAdded:[episode]
     login(username:String!, password:String!): String
@@ -122,6 +125,7 @@ const root = {
   findAnimeByGenre: ({genre}) => _findAnimeByGenre(genre),
   findEpisode: ({animeID, episode}) => _findEpisode(animeID, episode),
   findEpisodes: ({animeID}) => _findEpisodes(animeID),
+  findUser: ({username}) => _findUser(username),
   latestAnimesAdded: ()=> _latestAnimesAdded(),
   latestEpisodesAdded: ()=> _latestEpisodesAdded(),
   login: async ({username, password}) => {
@@ -181,7 +185,7 @@ const app = express();
 
 // middlewares
 
- app.use(cors());
+app.use(cors());
 
 /* app.use('*', (req, res, next) => {
   console.log(req.headers.origin);
@@ -207,6 +211,7 @@ app.use(
 
 // server
 connect(process.env.MONGO_URI);
+// connect('mongodb://localhost/animTest30');
 
-app.listen(process.env.PORT);
+app.listen(port);
 console.log('server running on localhost:4000');
