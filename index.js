@@ -48,4 +48,4 @@ connect('mongodb://localhost/animTest30');
 
 // server
 app.listen(port);
-console.log('server running on localhost:4000');
+console.info('server running on localhost:4000');

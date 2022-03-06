@@ -1,3 +1,4 @@
+import _deleteAnime from './staticMethods/deleteAnime.js';
 import _find from './staticMethods/find.js';
 import _findAnime from './staticMethods/findAnime.js';
 import _findAnimeByGenre from './staticMethods/findAnimeByGenre.js';
@@ -11,6 +12,7 @@ import newAnime from './methods/new.js';
 import _newEpisode from './staticMethods/newEpisode.js';
 import _mostPopularAnime from './staticMethods/mostPopularAnime.js';
 import _searchAnime from './staticMethods/search.js';
+
 
 class Anime {
   #name;
@@ -68,6 +70,16 @@ class Anime {
     return _new;
   }
 
+
+  static async deleteAnime(animeId) {
+    try {
+      const _delete = await _deleteAnime(animeId);
+      return _delete;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
 
   static async find(page, limit) {
     try {

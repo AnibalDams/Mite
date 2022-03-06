@@ -1,17 +1,29 @@
 // graphQl Queries and mutations imports.
 
+import _deleteAnime from './src/mutations/deleteAnime.js';
+
 import _findAll from './src/queries/findAll.js';
+
 import _findAnime from './src/queries/findAnime.js';
+
 import _findAnimeByGenre from './src/queries/findAnimeByGenre.js';
+
 import _findEpisode from './src/queries/findEpisode.js';
+
 import _findEpisodes from './src/queries/findEpisodes.js';
+
 import _findGenres from './src/queries/findGenres.js';
+
 import _latestAnimesAdded from './src/queries/latestAnimesAdded.js';
+
 import _latestEpisodesAdded from './src/queries/latestEpisodesAdded.js';
+
 import newanime from './src/mutations/newAnime.js';
 
 import _search from './src/queries/search.js';
+
 import _newEpisode from './src/mutations/newEpisode.js';
+
 import _mostPopularAnime from './src/queries/mostPopularAnime.js';
 
 // other
@@ -21,6 +33,7 @@ import anime from './src/schemas/anime.schema.js';
 
 // The root provides a resolver function for each API endpoint
 const root = {
+  deleteAnime: ({animeId}) => _deleteAnime(animeId),
   findAll: ({page, limit}) => _findAll(page, limit),
   findAnime: ({animeID}) => _findAnime(animeID),
   findAnimeByGenre: ({genre}) => _findAnimeByGenre(genre),

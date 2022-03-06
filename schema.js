@@ -52,6 +52,9 @@ const schema = buildSchema(`
     totalPagination(animesPerPage:Int!):Int
   }
   type Mutation {
+    deleteAnime(animeId:String!) : String
+
+
     newAnime( 
       name:String!, 
       synopsis:String!, 
