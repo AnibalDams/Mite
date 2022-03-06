@@ -1,30 +1,11 @@
 import express from 'express';
 import {graphqlHTTP} from 'express-graphql';
-import {buildSchema} from 'graphql';
 import connect from './src/controllers/database.js';
 import cors from 'cors';
 import path from 'path';
 import {fileURLToPath} from 'url';
-
-// graphQl Queries and mutations imports.
-
-import _findAll from './src/queries/findAll.js';
-import _findAnime from './src/queries/findAnime.js';
-import _findAnimeByGenre from './src/queries/findAnimeByGenre.js';
-import _findEpisode from './src/queries/findEpisode.js';
-import _findEpisodes from './src/queries/findEpisodes.js';
-import _findGenres from './src/queries/findGenres.js';
-import _latestAnimesAdded from './src/queries/latestAnimesAdded.js';
-import _latestEpisodesAdded from './src/queries/latestEpisodesAdded.js';
-import newanime from './src/mutations/newAnime.js';
-
-import _search from './src/queries/search.js';
-import _newEpisode from './src/mutations/newEpisode.js';
-import _mostPopularAnime from './src/queries/mostPopularAnime.js';
-
-// other
-
-import anime from './src/schemas/anime.schema.js';
+import schema from './schema.js';
+import root from './root.js';
 
 // initializations
 
@@ -33,144 +14,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const port = process.env.PORT || 4000;
 
-
-const schema = buildSchema(`
-  type genres{
-    genre:String
-  }
-  type anime {
-    message:String
-    id:Int
-    _id:ID
-    name:String
-    synopsis:String
-    image:String
-    cover:String
-    releaseDate:String
-    study:String
-    onGoing:Boolean
-    genres:[String]
-    type:String
-    private:Boolean
-    views:Int
-    _v:Int
-  }
-  type episodeServer{
-    name:String
-    url:String
-  }
-  type episode {
-    message:String
-    anime:Int
-    episodeNumber:Int
-    thumbnail:String
-    episodeName:String
-    servers:[episodeServer]
-    uploadedAt:String
-  }
-  input episodeServerInput{
-    name:String
-    url:String
-  }
-  type Query {
-    findAll(page:Int!, limit:Int!):[anime]
-    findAnime(animeID:Int!) : anime
-    findAnimeByGenre(genre:String!):[anime]
-    findEpisode(animeID:Int!, episode:Int!):episode
-    findEpisodes(animeID:Int!):[episode]
-    findGenres:[genres]
-    latestAnimesAdded:[anime]
-    latestEpisodesAdded:[episode]
-    mostPopularAnime: [anime]
-    search(anime:String!): [anime]
-    totalPagination(animesPerPage:Int!):Int
-  }
-  type Mutation {
-    newAnime( 
-      name:String!, 
-      synopsis:String!, 
-      color:String!, 
-      image:String!, 
-      cover:String!, 
-      releaseDate:String!, 
-      study:String!, 
-      onGoing:Boolean!, 
-      genres:[String]!, 
-      type:String!, 
-      Private:Boolean!) : anime
-    newEpisode(
-      anime:Int!, 
-      episodeNumber:Int!,
-      thumbnail:String!, 
-      episodeName:String, 
-      servers:[episodeServerInput]):episode
-  }
-  
-`);
-
-// The root provides a resolver function for each API endpoint
-const root = {
-  findAll: ({page, limit}) => _findAll(page, limit),
-  findAnime: ({animeID}) => _findAnime(animeID),
-  findAnimeByGenre: ({genre}) => _findAnimeByGenre(genre),
-  findEpisode: ({animeID, episode}) => _findEpisode(animeID, episode),
-  findEpisodes: ({animeID}) => _findEpisodes(animeID),
-  findGenres: () => _findGenres(),
-  findUser: ({username}) => _findUser(username),
-  latestAnimesAdded: ()=> _latestAnimesAdded(),
-  latestEpisodesAdded: ()=> _latestEpisodesAdded(),
-  login: async ({username, password}) => {
-    const res = await _login(username, password);
-    return res;
-  },
-
-  newUser: async ({username, password, admin}) => {
-    const res = await newuser(username, password, admin);
-    return res;
-  },
-  newAnime: async ({
-    name,
-    synopsis,
-    color,
-    image,
-    cover,
-    releaseDate,
-    study,
-    onGoing,
-    genres,
-    type,
-    Private,
-  }) => {
-    const New = await newanime(
-        name,
-        synopsis,
-        color,
-        image,
-        cover,
-        releaseDate,
-        study,
-        onGoing,
-        genres,
-        type,
-        Private,
-    );
-    return New;
-  },
-  mostPopularAnime: async () => await _mostPopularAnime(),
-  search: async ({anime}) => _search(anime),
-  newEpisode: async ({
-    anime,
-    episodeNumber,
-    thumbnail,
-    episodeName,
-    servers,
-  }) => _newEpisode(anime, episodeNumber, thumbnail, episodeName, servers),
-  totalPagination: async ({animesPerPage}) => {
-    const animes = await anime.find();
-
-    return Math.floor(animes.length / animesPerPage);
-  },
-};
 
 const app = express();
 
@@ -200,9 +43,9 @@ app.use(
     }),
 );
 
-// server
-connect(process.env.MONGO_URI);
-// connect('mongodb://localhost/animTest30');
+// connect(process.env.MONGO_URI);
+connect('mongodb://localhost/animTest30');
 
+// server
 app.listen(port);
 console.log('server running on localhost:4000');
