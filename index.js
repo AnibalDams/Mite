@@ -43,8 +43,8 @@ app.use(
     }),
 );
 
-// connect(process.env.MONGO_URI);
-connect('mongodb://localhost/animTest30');
+connect(process.env.MONGO_URI);
+// connect('mongodb://localhost/animTest30');
 
 // server
 app.listen(port);
