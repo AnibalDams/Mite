@@ -116,7 +116,7 @@ class Anime {
       throw new Error(e);
     }
   }
-    static async findGenres() {
+  static async findGenres() {
     try {
       const find = await _findGenres();
       return find;

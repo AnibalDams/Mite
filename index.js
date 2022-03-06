@@ -14,12 +14,10 @@ import _findAnimeByGenre from './src/queries/findAnimeByGenre.js';
 import _findEpisode from './src/queries/findEpisode.js';
 import _findEpisodes from './src/queries/findEpisodes.js';
 import _findGenres from './src/queries/findGenres.js';
-import _findUser from './src/queries/findUser.js';
 import _latestAnimesAdded from './src/queries/latestAnimesAdded.js';
 import _latestEpisodesAdded from './src/queries/latestEpisodesAdded.js';
-import _login from './src/queries/login.js';
 import newanime from './src/mutations/newAnime.js';
-import newuser from './src/mutations/newUser.js';
+
 import _search from './src/queries/search.js';
 import _newEpisode from './src/mutations/newEpisode.js';
 import _mostPopularAnime from './src/queries/mostPopularAnime.js';
@@ -37,16 +35,6 @@ const port = process.env.PORT || 4000;
 
 
 const schema = buildSchema(`
-  type user {
-    message:String
-    _id:ID
-    username:String
-    
-    avatar:String
-    createdAt:String
-    
-    _v:Int
-  }
   type genres{
     genre:String
   }
@@ -91,16 +79,13 @@ const schema = buildSchema(`
     findEpisode(animeID:Int!, episode:Int!):episode
     findEpisodes(animeID:Int!):[episode]
     findGenres:[genres]
-    findUser(username:String!):user
     latestAnimesAdded:[anime]
     latestEpisodesAdded:[episode]
-    login(username:String!, password:String!): String
     mostPopularAnime: [anime]
     search(anime:String!): [anime]
     totalPagination(animesPerPage:Int!):Int
   }
   type Mutation {
-    newUser(username: String!, password:String!, admin:Boolean): user
     newAnime( 
       name:String!, 
       synopsis:String!, 
@@ -216,8 +201,8 @@ app.use(
 );
 
 // server
-connect(process.env.MONGO_URI);
-// connect('mongodb://localhost/animTest30');
+// connect(process.env.MONGO_URI);
+connect('mongodb://localhost/animTest30');
 
 app.listen(port);
 console.log('server running on localhost:4000');
