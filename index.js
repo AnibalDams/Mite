@@ -201,8 +201,8 @@ app.use(
 );
 
 // server
-// connect(process.env.MONGO_URI);
-connect('mongodb://localhost/animTest30');
+connect(process.env.MONGO_URI);
+// connect('mongodb://localhost/animTest30');
 
 app.listen(port);
 console.log('server running on localhost:4000');
