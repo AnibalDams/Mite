@@ -33,16 +33,16 @@ import anime from './src/schemas/anime.schema.js';
 
 // The root provides a resolver function for each API endpoint
 const root = {
-  deleteAnime: ({animeId}) => _deleteAnime(animeId),
-  findAll: ({page, limit}) => _findAll(page, limit),
-  findAnime: ({animeID}) => _findAnime(animeID),
-  findAnimeByGenre: ({genre}) => _findAnimeByGenre(genre),
-  findEpisode: ({animeID, episode}) => _findEpisode(animeID, episode),
-  findEpisodes: ({animeID}) => _findEpisodes(animeID),
-  findGenres: () => _findGenres(),
-  findUser: ({username}) => _findUser(username),
-  latestAnimesAdded: ()=> _latestAnimesAdded(),
-  latestEpisodesAdded: ()=> _latestEpisodesAdded(),
+  deleteAnime: async ({animeId}) =>await _deleteAnime(animeId),
+  findAll: async ({page, limit}) => await _findAll(page, limit),
+  findAnime: async({animeID}) =>await  _findAnime(animeID),
+  findAnimeByGenre:async ({genre}) =>await _findAnimeByGenre(genre),
+  findEpisode: async({animeID, episode}) =>await _findEpisode(animeID, episode),
+  findEpisodes: async({animeID}) =>await _findEpisodes(animeID),
+  findGenres: async() => await _findGenres(),
+  findUser: async({username}) =>await _findUser(username),
+  latestAnimesAdded:async ()=> await _latestAnimesAdded(),
+  latestEpisodesAdded: async()=>await _latestEpisodesAdded(),
   login: async ({username, password}) => {
     const res = await _login(username, password);
     return res;
@@ -64,8 +64,11 @@ const root = {
     genres,
     type,
     Private,
+    secretKey
   }) => {
-    const New = await newanime(
+
+    if(secretKey ===process.env.SERCRETKEY){
+      const New = await newanime(
         name,
         synopsis,
         color,
@@ -78,7 +81,12 @@ const root = {
         type,
         Private,
     );
-    return New;
+    return New;   
+    }else{
+      return null
+    }    
+
+    
   },
   mostPopularAnime: async () => await _mostPopularAnime(),
   search: async ({anime}) => _search(anime),
@@ -88,7 +96,18 @@ const root = {
     thumbnail,
     episodeName,
     servers,
-  }) => _newEpisode(anime, episodeNumber, thumbnail, episodeName, servers),
+    secretKey
+  }) => {
+    if(secretKey ===process.env.SERCRETKEY){
+       const _new = await _newEpisode(anime, episodeNumber, thumbnail, episodeName, servers)
+       console.log(_new)
+       return _new
+    }else{
+      return null
+    }    
+
+    
+  },
   totalPagination: async ({animesPerPage}) => {
     const animes = await anime.find();
 

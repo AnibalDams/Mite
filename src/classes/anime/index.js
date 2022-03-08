@@ -139,9 +139,9 @@ class Anime {
   }
 
 
-  static latestAnimesAdded() {
+  static async latestAnimesAdded() {
     try {
-      const latestAdded = _latestAnimesAdded();
+      const latestAdded =await _latestAnimesAdded();
       return latestAdded;
     } catch (e) {
       console.error(e);
@@ -149,18 +149,18 @@ class Anime {
     }
   }
 
-  static latestEpisodesAdded() {
+  static async latestEpisodesAdded() {
     try {
-      const latestAdded = _latestEpisodesAdded();
+      const latestAdded =await _latestEpisodesAdded();
       return latestAdded;
     } catch (e) {
       console.error(e);
       throw new Error(e);
     }
   }
-  static newEpisode(episodeData) {
+  static async newEpisode(episodeData) {
     try {
-      const New = _newEpisode(episodeData);
+      const New =await _newEpisode(episodeData);
       return New;
     } catch (e) {
       console.error(e);
@@ -168,18 +168,18 @@ class Anime {
     }
   }
 
-  static mostPopularAnime() {
+  static async mostPopularAnime() {
     try {
-      const mostPopular = _mostPopularAnime();
+      const mostPopular =await _mostPopularAnime();
       return mostPopular;
     } catch (e) {
       console.error(e);
       throw new Error(e);
     }
   }
-  static search(searchIndex) {
+  static async search(searchIndex) {
     try {
-      const Search = _searchAnime(searchIndex);
+      const Search =await _searchAnime(searchIndex);
       return Search;
     } catch (e) {
       console.error(e);

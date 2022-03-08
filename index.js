@@ -44,7 +44,7 @@ app.use(
 );
 
 connect(process.env.MONGO_URI);
-// connect('mongodb://localhost/animTest30');
+// connect('mongodb://localhost/animTest31');
 
 // server
 app.listen(port);
