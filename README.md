@@ -4,4 +4,3 @@ Esta es una API de GraphQl con las funcionalidades basicas de la aplicación, au
 
 > Programo por hobbie y no tengo una gran experiencia, asi que tengo muy claro que el codigo puede mejorar muchisimo.
 
-> Si quieres contribuir en el proyecto contactame por este email: damsanibal1@gmail.com
