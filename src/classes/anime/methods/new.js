@@ -1,5 +1,6 @@
 import Anime from '../../../schemas/anime.schema.js';
 import Genre from '../../../schemas/genres.schema.js';
+import {v4} from 'uuid'
 
 const newAnime = async (
     name,
@@ -16,7 +17,7 @@ const newAnime = async (
 ) => {
   try {
     const find = await Anime.find();
-    const id = find.length + 1;
+    const id = v4();
     const _anime = new Anime({
       id,
       name,

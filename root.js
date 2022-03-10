@@ -26,7 +26,6 @@ import _newEpisode from './src/mutations/newEpisode.js';
 
 import _mostPopularAnime from './src/queries/mostPopularAnime.js';
 
-import {v4} from 'uuid'
 // other
 
 import anime from './src/schemas/anime.schema.js';
@@ -115,7 +114,7 @@ const root = {
     return Math.floor(animes.length / animesPerPage);
   },
   changeId:async ({Anime})=>{
-    await anime.findByIdAndUpdate(Anime,{id:v4()})
+    await anime.findByIdAndUpdate(Anime,{id:})
     return "cambiado"
   }
 };
