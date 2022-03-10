@@ -3,7 +3,7 @@ export default `
 		    findAll(page:Int!, limit:Int!):[anime]
 		    findAnime(animeID:String!) : anime
 		    findAnimeByGenre(genre:String!):[anime]
-		    findEpisode(animeID:Int!, episode:Int!):episode
+		    findEpisode(animeID:String!, episode:Int!):episode
 		    findEpisodes(animeID:Int!):[episode]
 		    findGenres:[genres]
 		    latestAnimesAdded:[anime]

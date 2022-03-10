@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const {model, Schema} = mongoose;
 
 const episodeSchema = new Schema({
-  anime: Number,
+  anime: String,
   animeName: String,
   episodeNumber: Number,
   thumbnail: String,
