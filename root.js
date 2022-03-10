@@ -26,7 +26,7 @@ import _newEpisode from './src/mutations/newEpisode.js';
 
 import _mostPopularAnime from './src/queries/mostPopularAnime.js';
 
-import uuid from 'uuid'
+import {v4} from 'uuid'
 // other
 
 import anime from './src/schemas/anime.schema.js';
@@ -114,7 +114,7 @@ const root = {
 
     return Math.floor(animes.length / animesPerPage);
   },
-  changeId:async ({anime})=>await anime.findByIdAndUpdate(anime,{id:uuid.v4()})
+  changeId:async ({anime})=>await anime.findByIdAndUpdate(anime,{id:v4()})
 };
 
 
