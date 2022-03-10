@@ -4,7 +4,7 @@ export default `
 		    findAnime(animeID:String!) : anime
 		    findAnimeByGenre(genre:String!):[anime]
 		    findEpisode(animeID:String!, episode:Int!):episode
-		    findEpisodes(animeID:Int!):[episode]
+		    findEpisodes(animeID:String!):[episode]
 		    findGenres:[genres]
 		    latestAnimesAdded:[anime]
 		    latestEpisodesAdded:[episode]
