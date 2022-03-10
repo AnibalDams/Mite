@@ -2,27 +2,7 @@ import anime from '../../../schemas/anime.schema.js';
 
 const findAnime = async (animeID) => {
   try {
-    const Anime = await anime.findOne({
-      id:
-        animeID === '1' ?
-          1 :
-          animeID === '2' ?
-          2 :
-          animeID === '3' ?
-          3 :
-          animeID === '4' ?
-          4 :
-          animeID === '5' ?
-          5 :
-          animeID === '6' ?
-          6 :
-          animeID === '7' ?
-          7 :
-          animeID === '8' ?
-          8 :
-          animeID,
-      private: false,
-    });
+    const Anime = await anime.findOne({id: animeID,private: false,});
     console.log(Anime)
 
     if (Anime) {
