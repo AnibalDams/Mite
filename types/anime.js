@@ -17,4 +17,4 @@ export default `
     _v:Int
   }
 
-`
+`;

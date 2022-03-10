@@ -3,4 +3,4 @@ export default `
 	    name:String
 	    url:String
 	  }
-`
+`;

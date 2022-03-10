@@ -30,19 +30,19 @@ import _mostPopularAnime from './src/queries/mostPopularAnime.js';
 
 import anime from './src/schemas/anime.schema.js';
 
-
 // The root provides a resolver function for each API endpoint
 const root = {
-  deleteAnime: async ({animeId}) =>await _deleteAnime(animeId),
+  deleteAnime: async ({animeId}) => await _deleteAnime(animeId),
   findAll: async ({page, limit}) => await _findAll(page, limit),
-  findAnime: async({animeID}) =>await  _findAnime(animeID),
-  findAnimeByGenre:async ({genre}) =>await _findAnimeByGenre(genre),
-  findEpisode: async({animeID, episode}) =>await _findEpisode(animeID, episode),
-  findEpisodes: async({animeID}) =>await _findEpisodes(animeID),
-  findGenres: async() => await _findGenres(),
-  findUser: async({username}) =>await _findUser(username),
-  latestAnimesAdded:async ()=> await _latestAnimesAdded(),
-  latestEpisodesAdded: async()=>await _latestEpisodesAdded(),
+  findAnime: async ({animeID}) => await _findAnime(animeID),
+  findAnimeByGenre: async ({genre}) => await _findAnimeByGenre(genre),
+  findEpisode: async ({animeID, episode}) =>
+    await _findEpisode(animeID, episode),
+  findEpisodes: async ({animeID}) => await _findEpisodes(animeID),
+  findGenres: async () => await _findGenres(),
+  findUser: async ({username}) => await _findUser(username),
+  latestAnimesAdded: async () => await _latestAnimesAdded(),
+  latestEpisodesAdded: async () => await _latestEpisodesAdded(),
   login: async ({username, password}) => {
     const res = await _login(username, password);
     return res;
@@ -64,29 +64,26 @@ const root = {
     genres,
     type,
     Private,
-    secretKey
+    secretKey,
   }) => {
-
-    if(secretKey ===process.env.SERCRETKEY){
+    if (secretKey === process.env.SERCRETKEY) {
       const New = await newanime(
-        name,
-        synopsis,
-        color,
-        image,
-        cover,
-        releaseDate,
-        study,
-        onGoing,
-        genres,
-        type,
-        Private,
-    );
-    return New;   
-    }else{
-      return null
-    }    
-
-    
+          name,
+          synopsis,
+          color,
+          image,
+          cover,
+          releaseDate,
+          study,
+          onGoing,
+          genres,
+          type,
+          Private,
+      );
+      return New;
+    } else {
+      return null;
+    }
   },
   mostPopularAnime: async () => await _mostPopularAnime(),
   search: async ({anime}) => _search(anime),
@@ -96,28 +93,31 @@ const root = {
     thumbnail,
     episodeName,
     servers,
-    secretKey
+    secretKey,
   }) => {
-    if(secretKey ===process.env.SERCRETKEY){
-       const _new = await _newEpisode(anime, episodeNumber, thumbnail, episodeName, servers)
-       console.log(_new)
-       return _new
-    }else{
-      return null
-    }    
-
-    
+    if (secretKey === process.env.SERCRETKEY) {
+      const _new = await _newEpisode(
+          anime,
+          episodeNumber,
+          thumbnail,
+          episodeName,
+          servers,
+      );
+      console.log(_new);
+      return _new;
+    } else {
+      return null;
+    }
   },
   totalPagination: async ({animesPerPage}) => {
     const animes = await anime.find();
 
     return Math.floor(animes.length / animesPerPage);
   },
-  changeId:async ({Anime})=>{
-    await anime.findByIdAndUpdate(Anime,{id:8}) 
-    return "cambiado"
-  }
+  changeId: async ({Anime}) => {
+    await anime.findByIdAndUpdate(Anime, {id: 8});
+    return 'cambiado';
+  },
 };
-
 
 export default root;

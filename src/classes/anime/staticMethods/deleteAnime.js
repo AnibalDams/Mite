@@ -1,7 +1,6 @@
 import anime from '../../../schemas/anime.schema.js';
 
-
-const deleteAnime = async (id)=> {
+const deleteAnime = async (id) => {
   try {
     await anime.findByIdAndRemove(id);
     return `Anime ${id} eliminado`;
@@ -10,6 +9,5 @@ const deleteAnime = async (id)=> {
     throw new Error(e);
   }
 };
-
 
 export default deleteAnime;

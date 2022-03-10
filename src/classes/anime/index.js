@@ -13,7 +13,6 @@ import _newEpisode from './staticMethods/newEpisode.js';
 import _mostPopularAnime from './staticMethods/mostPopularAnime.js';
 import _searchAnime from './staticMethods/search.js';
 
-
 class Anime {
   #name;
   #synopsis;
@@ -69,7 +68,6 @@ class Anime {
     );
     return _new;
   }
-
 
   static async deleteAnime(animeId) {
     try {
@@ -138,10 +136,9 @@ class Anime {
     }
   }
 
-
   static async latestAnimesAdded() {
     try {
-      const latestAdded =await _latestAnimesAdded();
+      const latestAdded = await _latestAnimesAdded();
       return latestAdded;
     } catch (e) {
       console.error(e);
@@ -151,7 +148,7 @@ class Anime {
 
   static async latestEpisodesAdded() {
     try {
-      const latestAdded =await _latestEpisodesAdded();
+      const latestAdded = await _latestEpisodesAdded();
       return latestAdded;
     } catch (e) {
       console.error(e);
@@ -160,7 +157,7 @@ class Anime {
   }
   static async newEpisode(episodeData) {
     try {
-      const New =await _newEpisode(episodeData);
+      const New = await _newEpisode(episodeData);
       return New;
     } catch (e) {
       console.error(e);
@@ -170,7 +167,7 @@ class Anime {
 
   static async mostPopularAnime() {
     try {
-      const mostPopular =await _mostPopularAnime();
+      const mostPopular = await _mostPopularAnime();
       return mostPopular;
     } catch (e) {
       console.error(e);
@@ -179,7 +176,7 @@ class Anime {
   }
   static async search(searchIndex) {
     try {
-      const Search =await _searchAnime(searchIndex);
+      const Search = await _searchAnime(searchIndex);
       return Search;
     } catch (e) {
       console.error(e);

@@ -1,6 +1,6 @@
 import Anime from '../../../schemas/anime.schema.js';
 import Genre from '../../../schemas/genres.schema.js';
-import {v4} from 'uuid'
+import {v4} from 'uuid';
 
 const newAnime = async (
     name,

@@ -1,7 +1,6 @@
 import Genre from '../../../schemas/genres.schema.js';
 
-
-const findGenres = async ()=> {
+const findGenres = async () => {
   try {
     const find = await Genre.find();
     return find;
@@ -10,6 +9,5 @@ const findGenres = async ()=> {
     throw new Error(e);
   }
 };
-
 
 export default findGenres;

@@ -17,7 +17,6 @@ const animeSchema = new Schema({
   private: Boolean,
   views: {type: Number, default: 0},
   uploadedAt: {type: Date, default: Date.now},
-
 });
 
 export default model('anime', animeSchema);

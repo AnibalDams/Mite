@@ -9,11 +9,9 @@ import root from './root.js';
 
 // initializations
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const port = process.env.PORT || 4000;
-
 
 const app = express();
 

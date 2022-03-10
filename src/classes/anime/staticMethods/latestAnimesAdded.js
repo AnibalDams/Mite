@@ -10,5 +10,4 @@ const latestAnimesAdded = async () => {
   }
 };
 
-
 export default latestAnimesAdded;

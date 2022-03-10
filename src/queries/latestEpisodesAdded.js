@@ -1,6 +1,5 @@
 import Anime from '../classes/anime/index.js';
 
-
 const latestEpisodesAdded = async () => {
   try {
     const find = await Anime.latestEpisodesAdded();

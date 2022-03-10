@@ -10,5 +10,4 @@ const latestEpisodesAdded = async () => {
   }
 };
 
-
 export default latestEpisodesAdded;

@@ -12,4 +12,4 @@ export default `
 		    search(anime:String!): [anime]
 		    totalPagination(animesPerPage:Int!):Int
 		  }
-`
+`;
