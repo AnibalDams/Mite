@@ -27,6 +27,8 @@ export default `
 		      servers:[episodeServerInput]
 		      secretKey:String
 		      ):episode
+		    changeId(anime:String!) : String
+
 		      
 		  }
 
