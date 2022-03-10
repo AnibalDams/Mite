@@ -1,15 +1,47 @@
 import anime from '../../../schemas/anime.schema.js';
-// import historial from '../../../schemas/historial.schema.js';
 
 const findAnime = async (animeID) => {
   try {
-    const Anime = await anime.findOne({id: animeID, private: false});
+    let Anime;
+    switch (animeID){
+      case "1":
+          Anime = await anime.findOne({id: 1, private: false});
+          break
+      case "2":
+          Anime = await anime.findOne({id: 2, private: false});
+          break
+      case "3":
+          Anime = await anime.findOne({id: 3, private: false});
+          break
+      case "4":
+          Anime = await anime.findOne({id: 4, private: false});
+          break
+      case "5":
+          Anime = await anime.findOne({id: 5, private: false});
+          break
+      case "6":
+          Anime = await anime.findOne({id: 6, private: false});
+          break
+      case "7":
+          Anime = await anime.findOne({id: 7, private: false});
+          break
+      case "8":
+          Anime = await anime.findOne({id: 8, private: false});
+          break
+      default:
+          Anime = await anime.findOne({id: animeID, private: false});
+          break
+          
+          
+          
+          
+
+
+
+    }
+
     if (Anime) {
-      /* const Historial = new historial({
-        type: 'Anime',
-        name: Anime.name,
-        image: Anime.cover,
-      }); */
+
       await anime.findByIdAndUpdate(Anime._id, {
         $inc: {
           views: 1,
