@@ -23,6 +23,7 @@ const findAnime = async (animeID) => {
           animeID,
       private: false,
     });
+    console.log(Anime)
 
     if (Anime) {
       await anime.findByIdAndUpdate(Anime._id, {
