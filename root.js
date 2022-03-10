@@ -114,7 +114,7 @@ const root = {
     return Math.floor(animes.length / animesPerPage);
   },
   changeId:async ({Anime})=>{
-    await anime.findByIdAndUpdate(Anime,{id:})
+    await anime.findByIdAndUpdate(Anime,{id:8}) 
     return "cambiado"
   }
 };
