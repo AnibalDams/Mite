@@ -20,7 +20,7 @@ export default `
 		      ) : anime
 		      
 		    newEpisode(
-		      anime:Int!, 
+		      anime:String!, 
 		      episodeNumber:Int!,
 		      thumbnail:String!, 
 		      episodeName:String, 

@@ -1,7 +1,7 @@
 export default `
 		type episode {
 		    message:String
-		    anime:Int
+		    anime:String
 		    animeName:String
 		    episodeNumber:Int
 		    thumbnail:String
