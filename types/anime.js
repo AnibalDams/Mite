@@ -1,7 +1,7 @@
 export default `
 	  type anime {
     message:String
-    id:Int
+    id:String
     _id:ID
     name:String
     synopsis:String
