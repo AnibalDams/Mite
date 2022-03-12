@@ -4,8 +4,8 @@ import connect from './src/controllers/database.js';
 import cors from 'cors';
 import path from 'path';
 import {fileURLToPath} from 'url';
-import schema from './schema.js';
-import root from './root.js';
+import schema from './src/schema.js';
+import root from './src/root.js';
 
 // initializations
 
@@ -28,6 +28,7 @@ app.use(cors());
   }
   next();
 });*/
+
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use('/img', express.static(path.join(__dirname, '/src/public/img')));
