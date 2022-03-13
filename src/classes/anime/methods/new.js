@@ -16,7 +16,6 @@ const newAnime = async (
     Private,
 ) => {
   try {
-    const find = await Anime.find();
     const id = v4();
     const _anime = new Anime({
       id,

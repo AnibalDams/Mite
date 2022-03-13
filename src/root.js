@@ -1,34 +1,34 @@
 // graphQl Queries and mutations imports.
 
-import _deleteAnime from './src/mutations/deleteAnime.js';
+import _deleteAnime from './mutations/deleteAnime.js';
 
-import _findAll from './src/queries/findAll.js';
+import _findAll from './queries/findAll.js';
 
-import _findAnime from './src/queries/findAnime.js';
+import _findAnime from './queries/findAnime.js';
 
-import _findAnimeByGenre from './src/queries/findAnimeByGenre.js';
+import _findAnimeByGenre from './queries/findAnimeByGenre.js';
 
-import _findEpisode from './src/queries/findEpisode.js';
+import _findEpisode from './queries/findEpisode.js';
 
-import _findEpisodes from './src/queries/findEpisodes.js';
+import _findEpisodes from './queries/findEpisodes.js';
 
-import _findGenres from './src/queries/findGenres.js';
+import _findGenres from './queries/findGenres.js';
 
-import _latestAnimesAdded from './src/queries/latestAnimesAdded.js';
+import _latestAnimesAdded from './queries/latestAnimesAdded.js';
 
-import _latestEpisodesAdded from './src/queries/latestEpisodesAdded.js';
+import _latestEpisodesAdded from './queries/latestEpisodesAdded.js';
 
-import newanime from './src/mutations/newAnime.js';
+import newanime from './mutations/newAnime.js';
 
-import _search from './src/queries/search.js';
+import _search from './queries/search.js';
 
-import _newEpisode from './src/mutations/newEpisode.js';
+import _newEpisode from './mutations/newEpisode.js';
 
-import _mostPopularAnime from './src/queries/mostPopularAnime.js';
+import _mostPopularAnime from './queries/mostPopularAnime.js';
 
 // other
 
-import anime from './src/schemas/anime.schema.js';
+import anime from './schemas/anime.schema.js';
 
 // The root provides a resolver function for each API endpoint
 const root = {

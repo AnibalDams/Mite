@@ -1,4 +1,48 @@
-import _deleteAnime from './staticMethods/deleteAnime.js';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>classes/anime/index.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Anime.html">Anime</a><ul class='methods'><li data-type='method'><a href="Anime.html#.deleteAnime">deleteAnime</a></li><li data-type='method'><a href="Anime.html#.find">find</a></li><li data-type='method'><a href="Anime.html#.findAnime">findAnime</a></li><li data-type='method'><a href="Anime.html#.findAnimeByGenre">findAnimeByGenre</a></li><li data-type='method'><a href="Anime.html#.findEpisode">findEpisode</a></li><li data-type='method'><a href="Anime.html#.findEpisodes">findEpisodes</a></li><li data-type='method'><a href="Anime.html#.findGenres">findGenres</a></li><li data-type='method'><a href="Anime.html#.latestAnimesAdded">latestAnimesAdded</a></li><li data-type='method'><a href="Anime.html#.latestEpisodesAdded">latestEpisodesAdded</a></li><li data-type='method'><a href="Anime.html#.mostPopularAnime">mostPopularAnime</a></li><li data-type='method'><a href="Anime.html#.newEpisode">newEpisode</a></li><li data-type='method'><a href="Anime.html#.search">search</a></li><li data-type='method'><a href="Anime.html#newAnime">newAnime</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#_connect">_connect</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">classes/anime/index.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import _deleteAnime from './staticMethods/deleteAnime.js';
 import _find from './staticMethods/find.js';
 import _findAnime from './staticMethods/findAnime.js';
 import _findAnimeByGenre from './staticMethods/findAnimeByGenre.js';
@@ -27,7 +71,7 @@ import _searchAnime from './staticMethods/search.js';
  * @property {string} releaseDate Año en el que fue emitido por primera vez
  * @property {string} study Estudio de animación encargado del anime
  * @property {boolean} onGoing Si esta en emisión o no
- * @property {Array<string>} genres Arreglo con los generos del anime
+ * @property {Array&lt;string>} genres Arreglo con los generos del anime
  * @property {string} type Tipo de anime que es, Anime, Anime latino, OVA, Pelicula, etc
  * @property {boolean} private Si es privado o no
  * @property {number} _v Dato que da la base de datos
@@ -41,7 +85,7 @@ import _searchAnime from './staticMethods/search.js';
  * @property {string} episodeNumber Numero del episodio
  * @property {string} thumbnail Miniatura del episodio
  * @property {string} episodeName Nombre del espisodio
- * @property {Array<{name:string, url:string}>} Servidores donde se alojan los episodios
+ * @property {Array&lt;{name:string, url:string}>} Servidores donde se alojan los episodios
  */
 
 /**
@@ -72,7 +116,7 @@ class Anime {
  * @param {string} releaseDate Fecha en la que fue emitido
  * @param {string} study Estudio de animación que estuvo encargado del mismo
  * @param {string} onGoing Esto se refiera a si esta en emisión o no
- * @param {Array<string>} genres Generos a los que pertenece
+ * @param {Array&lt;string>} genres Generos a los que pertenece
  * @param {string} type Que tipo de anime es, Anime, Anime latino, OVA,etc
  * @param {boolean} Private Privado o no
  */
@@ -124,7 +168,7 @@ class Anime {
   /**
    * Eliminar un anime determinado {@link _deleteAnime}
    * @param {string} animeId ID de los animes en la base de datos
-   * @return {Promise<string>} Mensaje que dice que se elimino el anime correctamente
+   * @return {Promise&lt;string>} Mensaje que dice que se elimino el anime correctamente
    */
   static async deleteAnime(animeId) {
     try {
@@ -139,7 +183,7 @@ class Anime {
    * Mostrar los animes guardados, divididos por paginación {@link _find}
    * @param {number} page Número de la pagina
    * @param {number} limit Limite de animes que se muestra en una pagina
-   * @return {Promise<anime[]>} Retorna un array con los animes encontrados
+   * @return {Promise&lt;anime[]>} Retorna un array con los animes encontrados
    */
   static async find(page, limit) {
     try {
@@ -153,7 +197,7 @@ class Anime {
   /**
    * muestra solo un anime
    * @param {string} animeId Id generado previamente al crear el anime (no usar el de la base de datos sino el generado el servidor)
-   * @return {Promise<anime>} retorna el anime en concreto
+   * @return {Promise&lt;anime>} retorna el anime en concreto
    */
   static async findAnime(animeId) {
     try {
@@ -167,7 +211,7 @@ class Anime {
   /**
    * Buscar todos los animes de un genero determinado
    * @param {string} genre Genero el cual queremos ver los animes
-   * @return {Array<anime>} Retorna una lista con los animes del genero proveido
+   * @return {Array&lt;anime>} Retorna una lista con los animes del genero proveido
    */
   static async findAnimeByGenre(genre) {
     try {
@@ -183,7 +227,7 @@ class Anime {
    * Busca un episodio en concreto {@link _findEpisode}
    * @param {string} animeId ID del anime que contiene el episodio (id generado)
    * @param {string} episode Número del episodio que queremos mostrar
-   * @return {Promise<episodio>} Episodio encontrado en la base de datos
+   * @return {Promise&lt;episodio>} Episodio encontrado en la base de datos
    */
   static async findEpisode(animeId, episode) {
     try {
@@ -197,7 +241,7 @@ class Anime {
   /**
    * Todos los episodios que tiene un anime {@link _findEpisodes}
    * @param {string} animeId ID del anime del cual queremos ver los episodios
-   * @return {Promise<episodio[]>}
+   * @return {Promise&lt;episodio[]>}
    */
   static async findEpisodes(animeId) {
     try {
@@ -210,7 +254,7 @@ class Anime {
   }
   /**
    * Muestra todos los generos que existen hasta el momento
-   * @return {Array<string>} Arreglo con todos los generos
+   * @return {Array&lt;string>} Arreglo con todos los generos
    */
   static async findGenres() {
     try {
@@ -223,7 +267,7 @@ class Anime {
   }
   /**
    * Ultimos animes agregados a la base de datos {@link _latestAnimesAdded}
-   * @return {Promise<anime[]>} Lista con los ultimos animes agregados
+   * @return {Promise&lt;anime[]>} Lista con los ultimos animes agregados
    */
   static async latestAnimesAdded() {
     try {
@@ -236,7 +280,7 @@ class Anime {
   }
   /**
    * Muestra los ultimos episodios agreados sin importar el anime que sea {@link _latestEpisodesAdded}
-   * @return {Promise<episodio[]>} Lista con los ultimos episodios agregados
+   * @return {Promise&lt;episodio[]>} Lista con los ultimos episodios agregados
    */
   static async latestEpisodesAdded() {
     try {
@@ -250,7 +294,7 @@ class Anime {
   /**
    * Crear un nuevo episodio {@link _newEpisode}
    * @param {episodio} episodeData datos del episodio que queremos crear
-   * @return {Promise<episodio>} Episodio agragado a la base de datos
+   * @return {Promise&lt;episodio>} Episodio agragado a la base de datos
    */
   static async newEpisode(episodeData) {
     try {
@@ -264,7 +308,7 @@ class Anime {
 
   /**
    * Mostrar los animes mas populares del momento {@link _mostPopularAnime}
-   * @return {Promise<anime[]>} Lista con los animes mas populares
+   * @return {Promise&lt;anime[]>} Lista con los animes mas populares
    */
   static async mostPopularAnime() {
     try {
@@ -278,7 +322,7 @@ class Anime {
   /**
    * Buscar animes atraves de su nombre {@link _searchAnime}
    * @param {string} searchIndex Nombre del anime que queremos buscar
-   * @return {Promise<anime[]>} lista con los animes que coincida con el termino que ingresamos
+   * @return {Promise&lt;anime[]>} lista con los animes que coincida con el termino que ingresamos
    * @example
    * const buscarAnime = await Anime.search("One Piece");
    */
@@ -294,3 +338,28 @@ class Anime {
 }
 
 export default Anime;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Sat Mar 12 2022 21:33:51 GMT-0400 (hora de Venezuela) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
