@@ -4,7 +4,7 @@
  */
 
 
- /**
+/**
   * QueriesAndMutations
   * @typedef {object} QueriesAndMutations 
   * @property {Promise<string>} deleteAnime Elimina un anime atraves de su _id. Mira {@link Anime.deleteAnime} para mas informacion
@@ -44,7 +44,7 @@ import anime from './schemas/anime.schema.js';
 import random from './libs/randomNumberInRange'
 
 // The root provides a resolver function for each API endpoint
-  /**
+/**
    * Objeto que contiene todas las funciones de las queries y las mutations.
    * @type {QueriesAndMutations} 
    */
@@ -53,7 +53,7 @@ const root = {
     const animes = await anime.find()
     const numeroRandom = random(0,animes.length)
     return animes[numeroRandom]
-  }
+  },
   deleteAnime: async ({animeId}) => await _deleteAnime(animeId),
   
   findAll: async ({page, limit}) => await _findAll(page, limit),
