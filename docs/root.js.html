@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>root.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Anime.html">Anime</a><ul class='methods'><li data-type='method'><a href="Anime.html#.deleteAnime">deleteAnime</a></li><li data-type='method'><a href="Anime.html#.find">find</a></li><li data-type='method'><a href="Anime.html#.findAnime">findAnime</a></li><li data-type='method'><a href="Anime.html#.findAnimeByGenre">findAnimeByGenre</a></li><li data-type='method'><a href="Anime.html#.findEpisode">findEpisode</a></li><li data-type='method'><a href="Anime.html#.findEpisodes">findEpisodes</a></li><li data-type='method'><a href="Anime.html#.findGenres">findGenres</a></li><li data-type='method'><a href="Anime.html#.latestAnimesAdded">latestAnimesAdded</a></li><li data-type='method'><a href="Anime.html#.latestEpisodesAdded">latestEpisodesAdded</a></li><li data-type='method'><a href="Anime.html#.mostPopularAnime">mostPopularAnime</a></li><li data-type='method'><a href="Anime.html#.newEpisode">newEpisode</a></li><li data-type='method'><a href="Anime.html#.search">search</a></li><li data-type='method'><a href="Anime.html#newAnime">newAnime</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-GraphQlQueriesAndMutations.html">GraphQlQueriesAndMutations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_connect">_connect</a></li><li><a href="global.html#random">random</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">root.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Todas las funciones que ejecutan las queries y muatations que hay en la API de Graphql
+ * @module GraphQlQueriesAndMutations 
+ */
+
+
+ /**
+  * QueriesAndMutations
+  * @typedef {object} QueriesAndMutations 
+  * @property {Promise&lt;string>} deleteAnime Elimina un anime atraves de su _id. Mira {@link Anime.deleteAnime} para mas informacion
+  */
+
+// graphQl Queries and mutations imports.
+
+import _deleteAnime from './mutations/deleteAnime.js';
+
+import _findAll from './queries/findAll.js';
+
+import _findAnime from './queries/findAnime.js';
+
+import _findAnimeByGenre from './queries/findAnimeByGenre.js';
+
+import _findEpisode from './queries/findEpisode.js';
+
+import _findEpisodes from './queries/findEpisodes.js';
+
+import _findGenres from './queries/findGenres.js';
+
+import _latestAnimesAdded from './queries/latestAnimesAdded.js';
+
+import _latestEpisodesAdded from './queries/latestEpisodesAdded.js';
+
+import newanime from './mutations/newAnime.js';
+
+import _search from './queries/search.js';
+
+import _newEpisode from './mutations/newEpisode.js';
+
+import _mostPopularAnime from './queries/mostPopularAnime.js';
+
+// other
+
+import anime from './schemas/anime.schema.js';
+
+// The root provides a resolver function for each API endpoint
+  /**
+   * Objeto que contiene todas las funciones de las queries y las mutations.
+   * @type {QueriesAndMutations} 
+   */
+const root = {
+  deleteAnime: async ({animeId}) => await _deleteAnime(animeId),
+  
+  findAll: async ({page, limit}) => await _findAll(page, limit),
+  
+  findAnime: async ({animeID}) => await _findAnime(animeID),
+  
+  findAnimeByGenre: async ({genre}) => await _findAnimeByGenre(genre),
+  
+  findEpisode: async ({animeID, episode}) =>
+    await _findEpisode(animeID, episode),
+  findEpisodes: async ({animeID}) => await _findEpisodes(animeID),
+  findGenres: async () => await _findGenres(),
+  findUser: async ({username}) => await _findUser(username),
+  latestAnimesAdded: async () => await _latestAnimesAdded(),
+  latestEpisodesAdded: async () => await _latestEpisodesAdded(),
+  login: async ({username, password}) => {
+    const res = await _login(username, password);
+    return res;
+  },
+
+  newUser: async ({username, password, admin}) => {
+    const res = await newuser(username, password, admin);
+    return res;
+  },
+  newAnime: async ({
+    name,
+    synopsis,
+    color,
+    image,
+    cover,
+    releaseDate,
+    study,
+    onGoing,
+    genres,
+    type,
+    Private,
+    secretKey,
+  }) => {
+    if (secretKey === process.env.SERCRETKEY) {
+      const New = await newanime(
+          name,
+          synopsis,
+          color,
+          image,
+          cover,
+          releaseDate,
+          study,
+          onGoing,
+          genres,
+          type,
+          Private,
+      );
+      return New;
+    } else {
+      return null;
+    }
+  },
+  mostPopularAnime: async () => await _mostPopularAnime(),
+  search: async ({anime}) => _search(anime),
+  newEpisode: async ({
+    anime,
+    episodeNumber,
+    thumbnail,
+    episodeName,
+    servers,
+    secretKey,
+  }) => {
+    if (secretKey === process.env.SERCRETKEY) {
+      const _new = await _newEpisode(
+          anime,
+          episodeNumber,
+          thumbnail,
+          episodeName,
+          servers,
+      );
+      console.log(_new);
+      return _new;
+    } else {
+      return null;
+    }
+  },
+  totalPagination: async ({animesPerPage}) => {
+    const animes = await anime.find();
+
+    return Math.floor(animes.length / animesPerPage);
+  },
+
+};
+
+export default root;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Sun Mar 13 2022 23:21:23 GMT-0400 (hora de Venezuela) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

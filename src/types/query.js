@@ -1,5 +1,6 @@
 export default `
 		type Query {
+			animeRandom:anime
 		    findAll(page:Int!, limit:Int!):[anime]
 		    findAnime(animeID:String!) : anime
 		    findAnimeByGenre(genre:String!):[anime]

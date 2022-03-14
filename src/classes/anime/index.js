@@ -122,7 +122,7 @@ class Anime {
     return _new;
   }
   /**
-   * Eliminar un anime determinado {@link _deleteAnime}
+   * Eliminar un anime a traves de su _id {@link _deleteAnime}
    * @param {string} animeId ID de los animes en la base de datos
    * @return {Promise<string>} Mensaje que dice que se elimino el anime correctamente
    */
