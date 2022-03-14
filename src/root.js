@@ -41,7 +41,7 @@ import _mostPopularAnime from './queries/mostPopularAnime.js';
 // other
 
 import anime from './schemas/anime.schema.js';
-import random from './libs/randomNumberInRange'
+import random from './libs/randomNumberInRange.js'
 
 // The root provides a resolver function for each API endpoint
 /**
