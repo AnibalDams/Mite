@@ -41,6 +41,7 @@ import _mostPopularAnime from './queries/mostPopularAnime.js';
 // other
 
 import anime from './schemas/anime.schema.js';
+import genre from './schemas/genres.schema.js'
 import random from './libs/randomNumberInRange.js'
 
 // The root provides a resolver function for each API endpoint
@@ -49,6 +50,17 @@ import random from './libs/randomNumberInRange.js'
    * @type {QueriesAndMutations} 
    */
 const root = {
+  animeAndGenreRandom:async()=>{
+    const numeroRandom = random(0,generos.length)
+    const generos = await genre.find()
+    const genero = generos[numeroRandom]
+    const animes = await _findAnimeByGenre(genero.genre)
+    return {
+      genre:genero.genre,
+      animes
+    }
+
+  },
   animeRandom: async ()=>{
     const animes = await anime.find()
     const numeroRandom = random(0,animes.length)

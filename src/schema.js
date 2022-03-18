@@ -7,10 +7,11 @@ import episodeServerType from './types/episodeServer.js';
 import episodeServerInput from './types/episodeServerInput.js';
 import query from './types/query.js';
 import mutation from './types/mutation.js';
+import animeAndGenre from './types/animeAndGenre.js';
 
 const schema = buildSchema(`
 
-  
+  ${animeAndGenre}
   ${animeType}
   ${genresType}
   ${episodeType}
