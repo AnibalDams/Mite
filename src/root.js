@@ -51,8 +51,8 @@ import random from './libs/randomNumberInRange.js'
    */
 const root = {
   animeAndGenreRandom:async()=>{
-    const numeroRandom = random(0,generos.length)
     const generos = await genre.find()
+    const numeroRandom = random(0,generos.length)
     const genero = generos[numeroRandom]
     const animes = await _findAnimeByGenre(genero.genre)
     return {
