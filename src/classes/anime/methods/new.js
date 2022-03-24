@@ -2,7 +2,7 @@ import Anime from '../../../schemas/anime.schema.js';
 import Genre from '../../../schemas/genres.schema.js';
 import {v4} from 'uuid';
 
-const newAnime = async (
+const _newAnime = async (
     name,
     synopsis,
     color,
@@ -52,4 +52,4 @@ const newAnime = async (
   }
 };
 
-export default newAnime;
+export default _newAnime;

@@ -1,6 +1,12 @@
 import Genre from '../../../schemas/genres.schema.js';
 
-const findGenres = async () => {
+/**
+   * Muestra todos los generos que existen hasta el momento
+   * @return {Array<string>} Arreglo con todos los generos
+   */
+
+
+const _findGenres = async () => {
   try {
     const find = await Genre.find();
     return find;
@@ -10,4 +16,4 @@ const findGenres = async () => {
   }
 };
 
-export default findGenres;
+export default _findGenres;

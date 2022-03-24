@@ -1,6 +1,11 @@
 import anime from '../../../schemas/anime.schema.js';
 
-const latestAnimesAdded = async () => {
+
+/**
+   * Ultimos animes agregados a la base de datos
+   * @return {Promise<anime[]>} Lista con los ultimos animes agregados
+   */
+const _latestAnimesAdded = async () => {
   try {
     const animes = await anime.find().sort({uploadedAt: -1}).limit(15);
     return animes;
@@ -10,4 +15,4 @@ const latestAnimesAdded = async () => {
   }
 };
 
-export default latestAnimesAdded;
+export default _latestAnimesAdded;

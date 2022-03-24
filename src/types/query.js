@@ -13,5 +13,6 @@ export default `
 		    mostPopularAnime: [anime]
 		    search(anime:String!): [anime]
 		    totalPagination(animesPerPage:Int!):Int
+		    
 		  }
 `;

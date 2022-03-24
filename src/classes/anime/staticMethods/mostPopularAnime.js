@@ -1,6 +1,11 @@
 import anime from '../../../schemas/anime.schema.js';
 
-const mostPopularAnime = async () => {
+
+/**
+   * Mostrar los animes mas populares del momento
+   * @return {Promise<anime[]>} Lista con los animes mas populares
+   */
+const _mostPopularAnime = async () => {
   try {
     const animes = await anime.find().sort({views: -1}).limit(15);
 
@@ -11,4 +16,4 @@ const mostPopularAnime = async () => {
   }
 };
 
-export default mostPopularAnime;
+export default _mostPopularAnime;

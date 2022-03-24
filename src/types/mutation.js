@@ -1,7 +1,7 @@
 export default `
 
 	type Mutation {
-		    deleteAnime(animeId:String!) : String
+		    deleteAnime(animeId:String!,secretKey:String!) : String
 
 
 		    newAnime( 
@@ -27,6 +27,7 @@ export default `
 		      servers:[episodeServerInput]
 		      secretKey:String
 		      ):episode
+		      changeAnimeState(animeId:String!,secretKey:String!):String
 		    
 
 		      

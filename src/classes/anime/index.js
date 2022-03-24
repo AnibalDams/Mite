@@ -1,3 +1,4 @@
+import _changeAnimeState from './staticMethods/changeAnimeState.js';
 import _deleteAnime from './staticMethods/deleteAnime.js';
 import _find from './staticMethods/find.js';
 import _findAnime from './staticMethods/findAnime.js';
@@ -120,6 +121,18 @@ class Anime {
         this.#private,
     );
     return _new;
+  }
+  /**
+   * Mira {@link _changeAnimeState} para más información.
+   * */
+  static async changeAnimeState(animeId) {
+    try {
+      const change = await _changeAnimeState(animeId);
+      return change;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
   }
   /**
    * Eliminar un anime a traves de su _id {@link _deleteAnime}
@@ -280,7 +293,7 @@ class Anime {
    * @param {string} searchIndex Nombre del anime que queremos buscar
    * @return {Promise<anime[]>} lista con los animes que coincida con el termino que ingresamos
    * @example
-   * const buscarAnime = await Anime.search("One Piece");
+   * const buscarAnime = await Anime.search("One Piece"); // Anime
    */
   static async search(searchIndex) {
     try {

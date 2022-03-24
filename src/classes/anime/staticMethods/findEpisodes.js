@@ -1,6 +1,12 @@
 import episode from '../../../schemas/episodes.schema.js';
 
-const findEpisodes = async (animeID) => {
+
+/**
+   * Todos los episodios que tiene un anime
+   * @param {string} animeId ID del anime del cual queremos ver los episodios
+   * @return {Promise<episodio[]>}
+   */
+const _findEpisodes = async (animeID) => {
   try {
     const episodes = await episode.find({anime: animeID});
 
@@ -15,4 +21,4 @@ const findEpisodes = async (animeID) => {
   }
 };
 
-export default findEpisodes;
+export default _findEpisodes;

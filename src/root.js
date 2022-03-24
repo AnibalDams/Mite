@@ -1,16 +1,17 @@
 /**
  * Todas las funciones que ejecutan las queries y muatations que hay en la API de Graphql
- * @module GraphQlQueriesAndMutations 
+ * @module GraphQlQueriesAndMutations
  */
 
 
 /**
   * QueriesAndMutations
-  * @typedef {object} QueriesAndMutations 
+  * @typedef {object} QueriesAndMutations
   * @property {Promise<string>} deleteAnime Elimina un anime atraves de su _id. Mira {@link Anime.deleteAnime} para mas informacion
   */
 
 // graphQl Queries and mutations imports.
+import _changeAnimeState from './mutations/changeAnimeState.js';
 
 import _deleteAnime from './mutations/deleteAnime.js';
 
@@ -41,39 +42,52 @@ import _mostPopularAnime from './queries/mostPopularAnime.js';
 // other
 
 import anime from './schemas/anime.schema.js';
-import genre from './schemas/genres.schema.js'
-import random from './libs/randomNumberInRange.js'
+import genre from './schemas/genres.schema.js';
+import random from './libs/randomNumberInRange.js';
 
 // The root provides a resolver function for each API endpoint
 /**
    * Objeto que contiene todas las funciones de las queries y las mutations.
-   * @type {QueriesAndMutations} 
+   * @type {QueriesAndMutations}
    */
 const root = {
-  animeAndGenreRandom:async()=>{
-    const generos = await genre.find()
-    const numeroRandom = random(0,generos.length)
-    const genero = generos[numeroRandom]
-    const animes = await _findAnimeByGenre(genero.genre)
+  animeAndGenreRandom: async ()=>{
+    const generos = await genre.find();
+    const numeroRandom = random(0, generos.length);
+    const genero = generos[numeroRandom];
+    const animes = await _findAnimeByGenre(genero.genre);
     return {
-      genre:genero.genre,
-      animes
-    }
-
+      genre: genero.genre,
+      animes,
+    };
   },
   animeRandom: async ()=>{
-    const animes = await anime.find()
-    const numeroRandom = random(0,animes.length)
-    return animes[numeroRandom]
+    const animes = await anime.find();
+    const numeroRandom = random(0, animes.length);
+    return animes[numeroRandom];
   },
-  deleteAnime: async ({animeId}) => await _deleteAnime(animeId),
-  
+  changeAnimeState: async ({animeId, secretKey}) => {
+    if (secretKey === process.env.SERCRETKEY) {
+      await _changeAnimeState(animeId);
+    } else {
+      return null;
+    }
+  },
+
+  deleteAnime: async ({animeId, secretKey}) =>{
+    if (secretKey === process.env.SERCRETKEY) {
+      await _deleteAnime(animeId);
+    } else {
+      return null;
+    }
+  },
+
   findAll: async ({page, limit}) => await _findAll(page, limit),
-  
+
   findAnime: async ({animeID}) => await _findAnime(animeID),
-  
+
   findAnimeByGenre: async ({genre}) => await _findAnimeByGenre(genre),
-  
+
   findEpisode: async ({animeID, episode}) =>
     await _findEpisode(animeID, episode),
   findEpisodes: async ({animeID}) => await _findEpisodes(animeID),

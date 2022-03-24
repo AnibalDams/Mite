@@ -1,6 +1,12 @@
 import anime from '../../../schemas/anime.schema.js';
 
-const findAnime = async (animeID) => {
+
+/**
+   * muestra solo un anime
+   * @param {string} animeId Id generado previamente al crear el anime (no usar el de la base de datos sino el generado el servidor)
+   * @return {Promise<anime>} retorna el anime en concreto
+   */
+const _findAnime = async (animeID) => {
   try {
     const Anime = await anime.findOne({id: animeID, private: false});
     console.log(Anime);
@@ -22,4 +28,4 @@ const findAnime = async (animeID) => {
   }
 };
 
-export default findAnime;
+export default _findAnime;

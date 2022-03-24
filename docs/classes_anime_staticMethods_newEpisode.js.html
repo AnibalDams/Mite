@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>controllers/database.js - Documentation</title>
+    <title>classes/anime/staticMethods/newEpisode.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">controllers/database.js</h1>
+    <h1 class="page-title">classes/anime/staticMethods/newEpisode.js</h1>
     
 
     
@@ -42,28 +42,35 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import mongoose from 'mongoose';
-const {connect} = mongoose;
+            <pre class="prettyprint source linenums"><code>import Episode from '../../../schemas/episodes.schema.js';
+import anime from '../index.js';
+
 
 /**
- * Se conecta a la base de datos MongoDB (local o cloud)
- * @param {string} mongoUri Url de la base de datos MongoDB
- * @return {Promise&lt;void>}
- */
-async function _connect(mongoUri) {
+   * Crear un nuevo episodio
+   * @param {episodio} episodeData datos del episodio que queremos crear
+   * @return {Promise&lt;episodio>} Episodio agragado a la base de datos
+   */
+async function _newEpisode(episodeData) {
   try {
-    await connect(mongoUri, {
-      useNewUrlParser: true,
-
-      useUnifiedTopology: true,
+    const findAnime = await anime.findAnime(episodeData.anime);
+    const _episode = new Episode({
+      anime: episodeData.anime,
+      episodeNumber: episodeData.episodeNumber,
+      thumbnail: episodeData.thumbnail,
+      episodeName: episodeData.episodeName,
+      servers: episodeData.servers,
+      animeName: findAnime.name,
     });
-    console.log('> DB is connected :D');
-  } catch (error) {
-    console.error(error);
+    await _episode.save();
+    return _episode;
+  } catch (e) {
+    console.error(e);
+    throw new Error(e);
   }
 }
 
-export default _connect;
+export default _newEpisode;
 </code></pre>
         </article>
     </section>

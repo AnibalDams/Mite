@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>controllers/database.js - Documentation</title>
+    <title>classes/anime/staticMethods/changeAnimeState.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">controllers/database.js</h1>
+    <h1 class="page-title">classes/anime/staticMethods/changeAnimeState.js</h1>
     
 
     
@@ -42,28 +42,25 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import mongoose from 'mongoose';
-const {connect} = mongoose;
+            <pre class="prettyprint source linenums"><code>import anime from '../../../schemas/anime.schema.js';
 
 /**
- * Se conecta a la base de datos MongoDB (local o cloud)
- * @param {string} mongoUri Url de la base de datos MongoDB
- * @return {Promise&lt;void>}
- */
-async function _connect(mongoUri) {
+ * Cambia el estado de un anime en emision a terminado
+ * @param {string} animeId ID del anime que queremos cambiar (id de la base de datos)
+ * @return {Promise&lt;string>} mensaje cuando finaliza el proceso
+ * */
+async function _changeAnimeState(animeId) {
   try {
-    await connect(mongoUri, {
-      useNewUrlParser: true,
-
-      useUnifiedTopology: true,
-    });
-    console.log('> DB is connected :D');
-  } catch (error) {
-    console.error(error);
+    await anime.findByIdAndUpdate(animeId, {onGoing: false});
+    return `anime ${animeId} cambiado a finalizado`;
+  } catch (e) {
+    console.error(e);
+    throw new Error(e);
   }
 }
 
-export default _connect;
+
+export default _changeAnimeState;
 </code></pre>
         </article>
     </section>

@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Anime.html">Anime</a><ul class='methods'><li data-type='method'><a href="Anime.html#.deleteAnime">deleteAnime</a></li><li data-type='method'><a href="Anime.html#.find">find</a></li><li data-type='method'><a href="Anime.html#.findAnime">findAnime</a></li><li data-type='method'><a href="Anime.html#.findAnimeByGenre">findAnimeByGenre</a></li><li data-type='method'><a href="Anime.html#.findEpisode">findEpisode</a></li><li data-type='method'><a href="Anime.html#.findEpisodes">findEpisodes</a></li><li data-type='method'><a href="Anime.html#.findGenres">findGenres</a></li><li data-type='method'><a href="Anime.html#.latestAnimesAdded">latestAnimesAdded</a></li><li data-type='method'><a href="Anime.html#.latestEpisodesAdded">latestEpisodesAdded</a></li><li data-type='method'><a href="Anime.html#.mostPopularAnime">mostPopularAnime</a></li><li data-type='method'><a href="Anime.html#.newEpisode">newEpisode</a></li><li data-type='method'><a href="Anime.html#.search">search</a></li><li data-type='method'><a href="Anime.html#newAnime">newAnime</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-GraphQlQueriesAndMutations.html">GraphQlQueriesAndMutations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_connect">_connect</a></li><li><a href="global.html#random">random</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Anime.html">Anime</a><ul class='methods'><li data-type='method'><a href="Anime.html#.changeAnimeState">changeAnimeState</a></li><li data-type='method'><a href="Anime.html#.deleteAnime">deleteAnime</a></li><li data-type='method'><a href="Anime.html#.find">find</a></li><li data-type='method'><a href="Anime.html#.findAnime">findAnime</a></li><li data-type='method'><a href="Anime.html#.findAnimeByGenre">findAnimeByGenre</a></li><li data-type='method'><a href="Anime.html#.findEpisode">findEpisode</a></li><li data-type='method'><a href="Anime.html#.findEpisodes">findEpisodes</a></li><li data-type='method'><a href="Anime.html#.findGenres">findGenres</a></li><li data-type='method'><a href="Anime.html#.latestAnimesAdded">latestAnimesAdded</a></li><li data-type='method'><a href="Anime.html#.latestEpisodesAdded">latestEpisodesAdded</a></li><li data-type='method'><a href="Anime.html#.mostPopularAnime">mostPopularAnime</a></li><li data-type='method'><a href="Anime.html#.newEpisode">newEpisode</a></li><li data-type='method'><a href="Anime.html#.search">search</a></li><li data-type='method'><a href="Anime.html#newAnime">newAnime</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-GraphQlQueriesAndMutations.html">GraphQlQueriesAndMutations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_changeAnimeState">_changeAnimeState</a></li><li><a href="global.html#_connect">_connect</a></li><li><a href="global.html#_deleteAnime">_deleteAnime</a></li><li><a href="global.html#_find">_find</a></li><li><a href="global.html#_findAnime">_findAnime</a></li><li><a href="global.html#_findAnimeByGenre">_findAnimeByGenre</a></li><li><a href="global.html#_findEpisode">_findEpisode</a></li><li><a href="global.html#_findEpisodes">_findEpisodes</a></li><li><a href="global.html#_findGenres">_findGenres</a></li><li><a href="global.html#_latestAnimesAdded">_latestAnimesAdded</a></li><li><a href="global.html#_latestEpisodesAdded">_latestEpisodesAdded</a></li><li><a href="global.html#_mostPopularAnime">_mostPopularAnime</a></li><li><a href="global.html#_newEpisode">_newEpisode</a></li><li><a href="global.html#_search">_search</a></li><li><a href="global.html#random">random</a></li></ul>
 </nav>
 
 <div id="main">
@@ -42,7 +42,8 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import _deleteAnime from './staticMethods/deleteAnime.js';
+            <pre class="prettyprint source linenums"><code>import _changeAnimeState from './staticMethods/changeAnimeState.js';
+import _deleteAnime from './staticMethods/deleteAnime.js';
 import _find from './staticMethods/find.js';
 import _findAnime from './staticMethods/findAnime.js';
 import _findAnimeByGenre from './staticMethods/findAnimeByGenre.js';
@@ -164,6 +165,18 @@ class Anime {
         this.#private,
     );
     return _new;
+  }
+  /**
+   * Mira {@link _changeAnimeState} para más información.
+   * */
+  static async changeAnimeState(animeId) {
+    try {
+      const change = await _changeAnimeState(animeId);
+      return change;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
   }
   /**
    * Eliminar un anime a traves de su _id {@link _deleteAnime}
@@ -324,7 +337,7 @@ class Anime {
    * @param {string} searchIndex Nombre del anime que queremos buscar
    * @return {Promise&lt;anime[]>} lista con los animes que coincida con el termino que ingresamos
    * @example
-   * const buscarAnime = await Anime.search("One Piece");
+   * const buscarAnime = await Anime.search("One Piece"); // Anime
    */
   static async search(searchIndex) {
     try {
@@ -352,7 +365,7 @@ export default Anime;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Sun Mar 13 2022 23:28:58 GMT-0400 (hora de Venezuela) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Wed Mar 23 2022 21:41:06 GMT-0400 (hora de Venezuela) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

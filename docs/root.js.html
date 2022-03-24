@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Anime.html">Anime</a><ul class='methods'><li data-type='method'><a href="Anime.html#.deleteAnime">deleteAnime</a></li><li data-type='method'><a href="Anime.html#.find">find</a></li><li data-type='method'><a href="Anime.html#.findAnime">findAnime</a></li><li data-type='method'><a href="Anime.html#.findAnimeByGenre">findAnimeByGenre</a></li><li data-type='method'><a href="Anime.html#.findEpisode">findEpisode</a></li><li data-type='method'><a href="Anime.html#.findEpisodes">findEpisodes</a></li><li data-type='method'><a href="Anime.html#.findGenres">findGenres</a></li><li data-type='method'><a href="Anime.html#.latestAnimesAdded">latestAnimesAdded</a></li><li data-type='method'><a href="Anime.html#.latestEpisodesAdded">latestEpisodesAdded</a></li><li data-type='method'><a href="Anime.html#.mostPopularAnime">mostPopularAnime</a></li><li data-type='method'><a href="Anime.html#.newEpisode">newEpisode</a></li><li data-type='method'><a href="Anime.html#.search">search</a></li><li data-type='method'><a href="Anime.html#newAnime">newAnime</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-GraphQlQueriesAndMutations.html">GraphQlQueriesAndMutations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_connect">_connect</a></li><li><a href="global.html#random">random</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Anime.html">Anime</a><ul class='methods'><li data-type='method'><a href="Anime.html#.changeAnimeState">changeAnimeState</a></li><li data-type='method'><a href="Anime.html#.deleteAnime">deleteAnime</a></li><li data-type='method'><a href="Anime.html#.find">find</a></li><li data-type='method'><a href="Anime.html#.findAnime">findAnime</a></li><li data-type='method'><a href="Anime.html#.findAnimeByGenre">findAnimeByGenre</a></li><li data-type='method'><a href="Anime.html#.findEpisode">findEpisode</a></li><li data-type='method'><a href="Anime.html#.findEpisodes">findEpisodes</a></li><li data-type='method'><a href="Anime.html#.findGenres">findGenres</a></li><li data-type='method'><a href="Anime.html#.latestAnimesAdded">latestAnimesAdded</a></li><li data-type='method'><a href="Anime.html#.latestEpisodesAdded">latestEpisodesAdded</a></li><li data-type='method'><a href="Anime.html#.mostPopularAnime">mostPopularAnime</a></li><li data-type='method'><a href="Anime.html#.newEpisode">newEpisode</a></li><li data-type='method'><a href="Anime.html#.search">search</a></li><li data-type='method'><a href="Anime.html#newAnime">newAnime</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-GraphQlQueriesAndMutations.html">GraphQlQueriesAndMutations</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_changeAnimeState">_changeAnimeState</a></li><li><a href="global.html#_connect">_connect</a></li><li><a href="global.html#_deleteAnime">_deleteAnime</a></li><li><a href="global.html#_find">_find</a></li><li><a href="global.html#_findAnime">_findAnime</a></li><li><a href="global.html#_findAnimeByGenre">_findAnimeByGenre</a></li><li><a href="global.html#_findEpisode">_findEpisode</a></li><li><a href="global.html#_findEpisodes">_findEpisodes</a></li><li><a href="global.html#_findGenres">_findGenres</a></li><li><a href="global.html#_latestAnimesAdded">_latestAnimesAdded</a></li><li><a href="global.html#_latestEpisodesAdded">_latestEpisodesAdded</a></li><li><a href="global.html#_mostPopularAnime">_mostPopularAnime</a></li><li><a href="global.html#_newEpisode">_newEpisode</a></li><li><a href="global.html#_search">_search</a></li><li><a href="global.html#random">random</a></li></ul>
 </nav>
 
 <div id="main">
@@ -44,13 +44,13 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * Todas las funciones que ejecutan las queries y muatations que hay en la API de Graphql
- * @module GraphQlQueriesAndMutations 
+ * @module GraphQlQueriesAndMutations
  */
 
 
 /**
   * QueriesAndMutations
-  * @typedef {object} QueriesAndMutations 
+  * @typedef {object} QueriesAndMutations
   * @property {Promise&lt;string>} deleteAnime Elimina un anime atraves de su _id. Mira {@link Anime.deleteAnime} para mas informacion
   */
 
@@ -85,27 +85,38 @@ import _mostPopularAnime from './queries/mostPopularAnime.js';
 // other
 
 import anime from './schemas/anime.schema.js';
-import random from './libs/randomNumberInRange'
+import genre from './schemas/genres.schema.js';
+import random from './libs/randomNumberInRange.js';
 
 // The root provides a resolver function for each API endpoint
 /**
    * Objeto que contiene todas las funciones de las queries y las mutations.
-   * @type {QueriesAndMutations} 
+   * @type {QueriesAndMutations}
    */
 const root = {
+  animeAndGenreRandom: async ()=>{
+    const generos = await genre.find();
+    const numeroRandom = random(0, generos.length);
+    const genero = generos[numeroRandom];
+    const animes = await _findAnimeByGenre(genero.genre);
+    return {
+      genre: genero.genre,
+      animes,
+    };
+  },
   animeRandom: async ()=>{
-    const animes = await anime.find()
-    const numeroRandom = random(0,animes.length)
-    return animes[numeroRandom]
+    const animes = await anime.find();
+    const numeroRandom = random(0, animes.length);
+    return animes[numeroRandom];
   },
   deleteAnime: async ({animeId}) => await _deleteAnime(animeId),
-  
+
   findAll: async ({page, limit}) => await _findAll(page, limit),
-  
+
   findAnime: async ({animeID}) => await _findAnime(animeID),
-  
+
   findAnimeByGenre: async ({genre}) => await _findAnimeByGenre(genre),
-  
+
   findEpisode: async ({animeID, episode}) =>
     await _findEpisode(animeID, episode),
   findEpisodes: async ({animeID}) => await _findEpisodes(animeID),
@@ -202,7 +213,7 @@ export default root;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Sun Mar 13 2022 23:28:58 GMT-0400 (hora de Venezuela) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.10</a> on Wed Mar 23 2022 21:41:06 GMT-0400 (hora de Venezuela) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

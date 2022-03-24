@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>controllers/database.js - Documentation</title>
+    <title>classes/anime/staticMethods/findEpisodes.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">controllers/database.js</h1>
+    <h1 class="page-title">classes/anime/staticMethods/findEpisodes.js</h1>
     
 
     
@@ -42,28 +42,30 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import mongoose from 'mongoose';
-const {connect} = mongoose;
+            <pre class="prettyprint source linenums"><code>import episode from '../../../schemas/episodes.schema.js';
+
 
 /**
- * Se conecta a la base de datos MongoDB (local o cloud)
- * @param {string} mongoUri Url de la base de datos MongoDB
- * @return {Promise&lt;void>}
- */
-async function _connect(mongoUri) {
+   * Todos los episodios que tiene un anime
+   * @param {string} animeId ID del anime del cual queremos ver los episodios
+   * @return {Promise&lt;episodio[]>}
+   */
+const _findEpisodes = async (animeID) => {
   try {
-    await connect(mongoUri, {
-      useNewUrlParser: true,
+    const episodes = await episode.find({anime: animeID});
 
-      useUnifiedTopology: true,
-    });
-    console.log('> DB is connected :D');
-  } catch (error) {
-    console.error(error);
+    if (episodes.length === 0) {
+      return [{message: 'Este anime no cuenta con ningun episodio aun.'}];
+    } else {
+      return episodes;
+    }
+  } catch (e) {
+    console.error(e);
+    throw new Error(e);
   }
-}
+};
 
-export default _connect;
+export default _findEpisodes;
 </code></pre>
         </article>
     </section>

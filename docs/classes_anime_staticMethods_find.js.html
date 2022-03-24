@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>controllers/database.js - Documentation</title>
+    <title>classes/anime/staticMethods/find.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">controllers/database.js</h1>
+    <h1 class="page-title">classes/anime/staticMethods/find.js</h1>
     
 
     
@@ -42,28 +42,32 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import mongoose from 'mongoose';
-const {connect} = mongoose;
+            <pre class="prettyprint source linenums"><code>import anime from '../../../schemas/anime.schema.js';
+
 
 /**
- * Se conecta a la base de datos MongoDB (local o cloud)
- * @param {string} mongoUri Url de la base de datos MongoDB
- * @return {Promise&lt;void>}
- */
-async function _connect(mongoUri) {
+   * Mostrar los animes guardados, divididos por paginación
+   * @param {number} page Número de la pagina
+   * @param {number} limit Limite de animes que se muestra en una pagina
+   * @return {Promise&lt;anime[]>} Retorna un array con los animes encontrados
+   */
+const _find = async (page, limit) => {
+  const skipIndex = (page - 1) * limit;
   try {
-    await connect(mongoUri, {
-      useNewUrlParser: true,
+    const animes = await anime
+        .find({private: false})
+        .sort({releaseDate: -1})
+        .limit(limit)
+        .skip(skipIndex);
 
-      useUnifiedTopology: true,
-    });
-    console.log('> DB is connected :D');
-  } catch (error) {
-    console.error(error);
+    return animes;
+  } catch (e) {
+    console.error(e);
+    throw new Error(e);
   }
-}
+};
 
-export default _connect;
+export default _find;
 </code></pre>
         </article>
     </section>

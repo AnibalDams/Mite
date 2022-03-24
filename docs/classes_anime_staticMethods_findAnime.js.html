@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>controllers/database.js - Documentation</title>
+    <title>classes/anime/staticMethods/findAnime.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">controllers/database.js</h1>
+    <h1 class="page-title">classes/anime/staticMethods/findAnime.js</h1>
     
 
     
@@ -42,28 +42,37 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import mongoose from 'mongoose';
-const {connect} = mongoose;
+            <pre class="prettyprint source linenums"><code>import anime from '../../../schemas/anime.schema.js';
+
 
 /**
- * Se conecta a la base de datos MongoDB (local o cloud)
- * @param {string} mongoUri Url de la base de datos MongoDB
- * @return {Promise&lt;void>}
- */
-async function _connect(mongoUri) {
+   * muestra solo un anime
+   * @param {string} animeId Id generado previamente al crear el anime (no usar el de la base de datos sino el generado el servidor)
+   * @return {Promise&lt;anime>} retorna el anime en concreto
+   */
+const _findAnime = async (animeID) => {
   try {
-    await connect(mongoUri, {
-      useNewUrlParser: true,
+    const Anime = await anime.findOne({id: animeID, private: false});
+    console.log(Anime);
 
-      useUnifiedTopology: true,
-    });
-    console.log('> DB is connected :D');
-  } catch (error) {
-    console.error(error);
+    if (Anime) {
+      await anime.findByIdAndUpdate(Anime._id, {
+        $inc: {
+          views: 1,
+        },
+      });
+      // await Historial.save();
+      return Anime;
+    } else {
+      return {message: 'El anime solicitado no existe.'};
+    }
+  } catch (e) {
+    console.error(e);
+    throw new Error(e);
   }
-}
+};
 
-export default _connect;
+export default _findAnime;
 </code></pre>
         </article>
     </section>

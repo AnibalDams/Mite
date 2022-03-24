@@ -1,7 +1,13 @@
 import Episode from '../../../schemas/episodes.schema.js';
 import anime from '../index.js';
 
-async function newEpisode(episodeData) {
+
+/**
+   * Crear un nuevo episodio
+   * @param {episodio} episodeData datos del episodio que queremos crear
+   * @return {Promise<episodio>} Episodio agragado a la base de datos
+   */
+async function _newEpisode(episodeData) {
   try {
     const findAnime = await anime.findAnime(episodeData.anime);
     const _episode = new Episode({
@@ -20,4 +26,4 @@ async function newEpisode(episodeData) {
   }
 }
 
-export default newEpisode;
+export default _newEpisode;
