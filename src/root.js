@@ -78,7 +78,7 @@ const root = {
     if (secretKey === process.env.SERCRETKEY) {
       await _deleteAnime(animeId);
     } else {
-      return null;
+      return "";
     }
   },
 
