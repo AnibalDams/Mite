@@ -70,7 +70,7 @@ const root = {
     if (secretKey === process.env.SERCRETKEY) {
       await _changeAnimeState(animeId);
     } else {
-      return null;
+      return "";
     }
   },
 
