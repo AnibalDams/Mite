@@ -3,8 +3,8 @@ import episode from '../../../schemas/episodes.schema.js';
 
 /**
    * Busca un episodio en concreto
-   * @param {string} animeId ID del anime que contiene el episodio (id generado)
-   * @param {string} episode Número del episodio que queremos mostrar
+   * @param {string} animeID ID del anime que contiene el episodio (id generado)
+   * @param {string} _episode Número del episodio que queremos mostrar
    * @return {Promise<episodio>} Episodio encontrado en la base de datos
    */
 const _findEpisode = async (animeID, _episode) => {

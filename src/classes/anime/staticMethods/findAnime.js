@@ -3,7 +3,7 @@ import anime from '../../../schemas/anime.schema.js';
 
 /**
    * muestra solo un anime
-   * @param {string} animeId Id generado previamente al crear el anime (no usar el de la base de datos sino el generado el servidor)
+   * @param {string} animeID Id generado previamente al crear el anime (no usar el de la base de datos sino el generado el servidor)
    * @return {Promise<anime>} retorna el anime en concreto
    */
 const _findAnime = async (animeID) => {

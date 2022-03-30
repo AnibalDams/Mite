@@ -11,7 +11,6 @@ function escapeRegex(text) {
    * @example
    * const buscarAnime = await Anime.search("One Piece"); // Anime
    */
-
 async function _search(searchIndex) {
   try {
     const regex = new RegExp(escapeRegex(searchIndex), 'gi');

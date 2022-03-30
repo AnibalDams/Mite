@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>classes/anime/staticMethods/latestAnimesAdded.js - Documentation</title>
+    <title>classes/user/index.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">classes/anime/staticMethods/latestAnimesAdded.js</h1>
+    <h1 class="page-title">classes/user/index.js</h1>
     
 
     
@@ -42,24 +42,51 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import anime from '../../../schemas/anime.schema.js';
+            <pre class="prettyprint source linenums"><code>import _signUp from './methods/signUp.js';
 
 
 /**
-   * Ultimos animes agregados a la base de datos
-   * @return {Promise&lt;anime[]>} Lista con los ultimos animes agregados
-   */
-const _latestAnimesAdded = async () => {
-  try {
-    const animes = await anime.find().sort({uploadedAt: -1}).limit(15);
-    return animes;
-  } catch (e) {
-    console.error(e);
-    throw new Error(e);
-  }
-};
+ * usuario
+ * @typedef {object} usuario
+ * @property {string} _id id del usuario (generado por la db)
+ * @property {string} id id del usuario (generado automaticamente)
+ * @property {string} username Nombre de usuario
+ * @property {string} password Contraseña del usuario
+ *
+ */
 
-export default _latestAnimesAdded;
+
+/**
+ * Clase que contiene todo lo relacionado a los usuarios
+ * @example
+ * const usuario = new User(username,password);
+ * await usuario.signUp();
+ */
+class User {
+  #username;
+  #password;
+  constructor(username, password) {
+    this.#username = username;
+    this.#password = password;
+  }
+
+
+  /**
+   * Mira {@link _signUp} Para mas información
+   */
+  async signUp() {
+    try {
+      const register = await _signUp(this.#username, this.#password);
+      return register;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+}
+
+
+export default User;
 </code></pre>
         </article>
     </section>

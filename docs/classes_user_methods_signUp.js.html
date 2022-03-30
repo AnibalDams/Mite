@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>classes/anime/staticMethods/latestAnimesAdded.js - Documentation</title>
+    <title>classes/user/methods/signUp.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">classes/anime/staticMethods/latestAnimesAdded.js</h1>
+    <h1 class="page-title">classes/user/methods/signUp.js</h1>
     
 
     
@@ -42,24 +42,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import anime from '../../../schemas/anime.schema.js';
+            <pre class="prettyprint source linenums"><code>import User from '../../../schemas/user.schema.js';
+import bcrypt from 'bcrypt';
+import {v4} from 'uuid';
 
 
 /**
-   * Ultimos animes agregados a la base de datos
-   * @return {Promise&lt;anime[]>} Lista con los ultimos animes agregados
-   */
-const _latestAnimesAdded = async () => {
+ * Crea un usuario nuevo con usuario y contraseña
+ * @param {string} username Nombre de usuario
+ * @param {string} password contraseña del usuario
+ * @return {Promise&lt;string>} Mensaje con información sobre como termino el proceso
+ */
+
+const _signUp = async (username, password) => {
   try {
-    const animes = await anime.find().sort({uploadedAt: -1}).limit(15);
-    return animes;
+    const usedUsername = await User.findOne({username});
+    if (usedUsername) {
+      return 'El usuario ya esta en uso';
+    } else {
+      const id = v4();
+    	const saltRounds = 10;
+    	const salt = await bcrypt.genSalt(saltRounds);
+    	const passwordH= await bcrypt.hash(password, salt);
+      const user = new User({id, username, password: passwordH});
+      await user.save();
+      return `Usuario creado satisfactoriamente. ${user.id}`;
+    }
   } catch (e) {
     console.error(e);
     throw new Error(e);
   }
 };
 
-export default _latestAnimesAdded;
+
+export default _signUp;
 </code></pre>
         </article>
     </section>

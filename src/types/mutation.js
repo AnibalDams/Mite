@@ -28,6 +28,7 @@ export default `
 		      secretKey:String
 		      ):episode
 		      changeAnimeState(animeId:String!,secretKey:String!):String
+		      newUser(username:String!, password:String!):String
 		    
 
 		      

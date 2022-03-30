@@ -36,6 +36,7 @@ import newanime from './mutations/newAnime.js';
 import _search from './queries/search.js';
 
 import _newEpisode from './mutations/newEpisode.js';
+import _newUser from './mutations/newUser.js';
 
 import _mostPopularAnime from './queries/mostPopularAnime.js';
 
@@ -70,7 +71,7 @@ const root = {
     if (secretKey === process.env.SERCRETKEY) {
       await _changeAnimeState(animeId);
     } else {
-      return "";
+      return '';
     }
   },
 
@@ -78,7 +79,7 @@ const root = {
     if (secretKey === process.env.SERCRETKEY) {
       await _deleteAnime(animeId);
     } else {
-      return "";
+      return '';
     }
   },
 
@@ -99,10 +100,10 @@ const root = {
     const res = await _login(username, password);
     return res;
   },
-
-  newUser: async ({username, password, admin}) => {
-    const res = await newuser(username, password, admin);
-    return res;
+  
+  newUser: async ({username, password}) => {
+    const _new = await _newUser(username, password);
+    return _new;
   },
   newAnime: async ({
     name,
