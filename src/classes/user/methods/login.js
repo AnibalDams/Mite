@@ -12,7 +12,7 @@ const _login = async (username,password) => {
 			const comparePassword = await bcrypt.compare(password,user.password)
 			if(comparePassword){
 				const token  = jwt.sign({ _id:user._id,id:user.id, username}, process.env.JWTKEY, { algorithm: 'RS256'});
-				return token
+				return `${token}`
 			}else{
 				return "Contraseña incorrecta"
 			}
