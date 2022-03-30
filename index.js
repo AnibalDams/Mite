@@ -42,7 +42,7 @@ app.use(
     }),
 );
 
-connect(process.env.MONGO_URI);
+ connect(process.env.MONGO_URI);
 // connect('mongodb://localhost/animTest31');
 
 // server
