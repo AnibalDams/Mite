@@ -2,7 +2,7 @@ export default `
 
 	type Mutation {
 		    deleteAnime(animeId:String!,secretKey:String!) : String
-
+		    login(username:String!,password:String!) : String
 
 		    newAnime( 
 		      name:String!, 

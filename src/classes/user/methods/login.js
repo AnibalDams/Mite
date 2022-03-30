@@ -24,4 +24,13 @@ const _login = async (username,password) => {
 		console.error(e)
 		throw new Error(e)
 	}
-} 
+
+
+
+
+
+
+
+}
+
+export default _login 

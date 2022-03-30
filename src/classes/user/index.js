@@ -1,3 +1,4 @@
+import _login from './methods/login.js';
 import _signUp from './methods/signUp.js';
 
 
@@ -37,6 +38,15 @@ class User {
     } catch (e) {
       console.error(e);
       throw new Error(e);
+    }
+  }
+  async login(){
+    try{
+      const Login = await _login(this.#username,this.#password)
+      return Login
+    }catch(e){
+      console.error(e)
+      throw new Error(e)
     }
   }
 }

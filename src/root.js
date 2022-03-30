@@ -30,6 +30,7 @@ import _findGenres from './queries/findGenres.js';
 import _latestAnimesAdded from './queries/latestAnimesAdded.js';
 
 import _latestEpisodesAdded from './queries/latestEpisodesAdded.js';
+import _login from './mutations/login.js';
 
 import newanime from './mutations/newAnime.js';
 
