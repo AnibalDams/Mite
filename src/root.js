@@ -17,6 +17,8 @@ import _deleteAnime from './mutations/deleteAnime.js';
 
 import _findAll from './queries/findAll.js';
 
+import _findAllProfiles from './queries/findAllProfiles.js';
+
 import _findAnime from './queries/findAnime.js';
 
 import _findAnimeByGenre from './queries/findAnimeByGenre.js';
@@ -35,8 +37,10 @@ import _login from './mutations/login.js';
 import newanime from './mutations/newAnime.js';
 
 import _search from './queries/search.js';
+import _selectUserProfile from './queries/selectUserProfile.js';
 
 import _newEpisode from './mutations/newEpisode.js';
+import _newProfile from './mutations/newProfile.js';
 import _newUser from './mutations/newUser.js';
 
 import _mostPopularAnime from './queries/mostPopularAnime.js';
@@ -86,6 +90,8 @@ const root = {
 
   findAll: async ({page, limit}) => await _findAll(page, limit),
 
+  findAllProfiles: async ({user}) => await _findAllProfiles(user),
+
   findAnime: async ({animeID}) => await _findAnime(animeID),
 
   findAnimeByGenre: async ({genre}) => await _findAnimeByGenre(genre),
@@ -101,7 +107,9 @@ const root = {
     const res = await _login(username, password);
     return res;
   },
-  
+
+  mostPopularAnime: async () => await _mostPopularAnime(),
+  newProfile: async ({name, avatar, user})=> await _newProfile(name, avatar, user),
   newUser: async ({username, password}) => {
     const _new = await _newUser(username, password);
     return _new;
@@ -139,8 +147,8 @@ const root = {
       return null;
     }
   },
-  mostPopularAnime: async () => await _mostPopularAnime(),
   search: async ({anime}) => _search(anime),
+  selectUserProfile: async ({id}) => _selectUserProfile(id),
   newEpisode: async ({
     anime,
     episodeNumber,

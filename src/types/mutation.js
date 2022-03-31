@@ -1,6 +1,7 @@
 export default `
 
 	type Mutation {
+		      changeAnimeState(animeId:String!,secretKey:String!):String
 		    deleteAnime(animeId:String!,secretKey:String!) : String
 		    login(username:String!,password:String!) : String
 
@@ -27,7 +28,7 @@ export default `
 		      servers:[episodeServerInput]
 		      secretKey:String
 		      ):episode
-		      changeAnimeState(animeId:String!,secretKey:String!):String
+		      newProfile(name:String!, avatar:String!, user:String!):String
 		      newUser(username:String!, password:String!):String
 		    
 

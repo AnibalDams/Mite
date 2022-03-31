@@ -1,6 +1,8 @@
+import _findAllProfiles from './staticMethods/newProfile.js';
 import _login from './methods/login.js';
+import _newProfile from './staticMethods/newProfile.js';
+import _selectUserProfile from './staticMethods/newProfile.js';
 import _signUp from './methods/signUp.js';
-
 
 /**
  * usuario
@@ -28,9 +30,45 @@ class User {
   }
 
 
+  static async findAllProfiles(user) {
+    try {
+      const find = await _findAllProfiles(user);
+      return find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
   /**
    * Mira {@link _signUp} Para mas información
    */
+  async login() {
+    try {
+      const Login = await _login(this.#username, this.#password);
+      return Login;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+  static async newProfile(name, avatar, user) {
+    try {
+      const _new = await _newProfile(name, avatar, user);
+      return _new;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+  static async selectUserProfile(id) {
+    try {
+      const select = await _selectUserProfile(id);
+      return select;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
   async signUp() {
     try {
       const register = await _signUp(this.#username, this.#password);
@@ -38,15 +76,6 @@ class User {
     } catch (e) {
       console.error(e);
       throw new Error(e);
-    }
-  }
-  async login(){
-    try{
-      const Login = await _login(this.#username,this.#password)
-      return Login
-    }catch(e){
-      console.error(e)
-      throw new Error(e)
     }
   }
 }
