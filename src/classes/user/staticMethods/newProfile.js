@@ -21,4 +21,4 @@ const _newProfile = async (name, avatar, user)=>{
 };
 
 
-export default newProfile;
+export default _newProfile;
