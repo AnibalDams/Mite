@@ -18,3 +18,6 @@ const _findAllProfiles = async (user)=>{
     throw new Error(e);
   }
 };
+
+
+export default _findAllProfiles

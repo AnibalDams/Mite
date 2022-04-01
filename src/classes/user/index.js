@@ -1,7 +1,7 @@
-import _findAllProfiles from './staticMethods/newProfile.js';
+import _findAllProfiles from './staticMethods/findAllProfiles.js';
 import _login from './methods/login.js';
 import _newProfile from './staticMethods/newProfile.js';
-import _selectUserProfile from './staticMethods/newProfile.js';
+import _selectUserProfile from './staticMethods/selectUserProfile.js';
 import _signUp from './methods/signUp.js';
 
 /**
