@@ -17,6 +17,9 @@ export default `
 		    findEpisodes(animeID:String!):[episode]
 		    
 		    findGenres:[genres]
+
+		    findAnimeInList(animeId:String!,userProfile:String!):animeList
+		    findAnimesInList(userProfile:String!):[animeList]
 		    
 		    latestAnimesAdded:[anime]
 		    

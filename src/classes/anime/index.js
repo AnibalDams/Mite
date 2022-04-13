@@ -1,17 +1,36 @@
+import _addAnimeToList from './staticMethods/addAnimeToList.js';
+
 import _changeAnimeState from './staticMethods/changeAnimeState.js';
+
 import _deleteAnime from './staticMethods/deleteAnime.js';
+
+import _deleteAnimeInList from './staticMethods/deleteAnimeInList.js';
+
 import _find from './staticMethods/find.js';
+
 import _findAnime from './staticMethods/findAnime.js';
+
+import _findAnimesInList from './staticMethods/findAnimesInList.js';
+import _findAnimeInList from './staticMethods/findAnimeInList.js';
+
 import _findAnimeByGenre from './staticMethods/findAnimeByGenre.js';
 
 import _findEpisode from './staticMethods/findEpisode.js';
+
 import _findEpisodes from './staticMethods/findEpisodes.js';
+
 import _findGenres from './staticMethods/findGenres.js';
+
 import _latestAnimesAdded from './staticMethods/latestAnimesAdded.js';
+
 import _latestEpisodesAdded from './staticMethods/latestEpisodesAdded.js';
+
 import newAnime from './methods/new.js';
+
 import _newEpisode from './staticMethods/newEpisode.js';
+
 import _mostPopularAnime from './staticMethods/mostPopularAnime.js';
+
 import _searchAnime from './staticMethods/search.js';
 
 /**
@@ -102,6 +121,17 @@ class Anime {
     this.#type = type;
     this.#private = Private;
   }
+
+  static async addAnimeToList(animeId, animeName, animeSynopsis, animeMain, animeCover, userProfile) {
+    try {
+      const add = await _addAnimeToList(animeId, animeName, animeSynopsis, animeMain, animeCover, userProfile);
+      return add;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+
   /**
    * Crear un nuevo anime con los datos que se ingresaron al instanciar el objeto {@link new}
    * @return {anime} Objeto del anime creado
@@ -148,6 +178,17 @@ class Anime {
       throw new Error(e);
     }
   }
+
+  static async deleteAnimeInList(animeId) {
+    try {
+      const _delete = await _deleteAnimeInList(animeId);
+      return _delete;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+
   /**
    * Mostrar los animes guardados, divididos por paginación {@link _find}
    * @param {number} page Número de la pagina
@@ -234,6 +275,27 @@ class Anime {
       throw new Error(e);
     }
   }
+
+  static async findAnimeInList(animeId, userProfile) {
+    try {
+      const find = await _findAnimeInList(animeId, userProfile);
+      return find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+
+  static async findAnimesInList(userProfile) {
+    try {
+      const find = await _findAnimesInList(userProfile);
+      return find;
+    } catch (e) {
+      console.error(e);
+      throw new Error(e);
+    }
+  }
+
   /**
    * Ultimos animes agregados a la base de datos {@link _latestAnimesAdded}
    * @return {Promise<anime[]>} Lista con los ultimos animes agregados

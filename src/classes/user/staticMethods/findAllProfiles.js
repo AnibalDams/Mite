@@ -20,4 +20,4 @@ const _findAllProfiles = async (user)=>{
 };
 
 
-export default _findAllProfiles
+export default _findAllProfiles;

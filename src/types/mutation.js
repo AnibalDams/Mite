@@ -1,8 +1,10 @@
 export default `
 
 	type Mutation {
-		      changeAnimeState(animeId:String!,secretKey:String!):String
+			addAnimeToList(animeId:String!, animeName:String!, animeSynopsis:String!, animeMain:String!, animeCover:String!, userProfile:String!):String
+		    changeAnimeState(animeId:String!,secretKey:String!):String
 		    deleteAnime(animeId:String!,secretKey:String!) : String
+		    deleteAnimeInList(animeId:String!,secretKey:String!) : String
 		    login(username:String!,password:String!) : String
 
 		    newAnime( 

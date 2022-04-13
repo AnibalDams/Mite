@@ -11,9 +11,13 @@
   */
 
 // graphQl Queries and mutations imports.
+import _addAnimeToList from './mutations/addAnimeToList.js';
+
 import _changeAnimeState from './mutations/changeAnimeState.js';
 
 import _deleteAnime from './mutations/deleteAnime.js';
+
+import _deleteAnimeInList from './mutations/deleteAnimeInList.js';
 
 import _findAll from './queries/findAll.js';
 
@@ -28,6 +32,9 @@ import _findEpisode from './queries/findEpisode.js';
 import _findEpisodes from './queries/findEpisodes.js';
 
 import _findGenres from './queries/findGenres.js';
+
+import _findAnimeInList from './queries/findAnimeInList.js';
+import _findAnimesInList from './queries/findAnimesInList.js';
 
 import _latestAnimesAdded from './queries/latestAnimesAdded.js';
 
@@ -57,6 +64,10 @@ import random from './libs/randomNumberInRange.js';
    * @type {QueriesAndMutations}
    */
 const root = {
+  addAnimeToList: async ({animeId, animeName, animeSynopsis, animeMain, animeCover, userProfile})=>{
+    const add = await _addAnimeToList(animeId, animeName, animeSynopsis, animeMain, animeCover, userProfile);
+    return add;
+  },
   animeAndGenreRandom: async ()=>{
     const generos = await genre.find();
     const numeroRandom = random(0, generos.length);
@@ -82,11 +93,23 @@ const root = {
 
   deleteAnime: async ({animeId, secretKey}) =>{
     if (secretKey === process.env.SERCRETKEY) {
-      await _deleteAnime(animeId);
+      const _delete = await _deleteAnime(animeId);
+      return _delete 
     } else {
       return '';
     }
   },
+
+  deleteAnimeInList: async ({animeId, secretKey}) =>{
+    if (secretKey === process.env.SERCRETKEY) {
+      const _delete = await _deleteAnimeInList(animeId);
+      return _delete
+    } else {
+
+      return '';
+    }
+  },
+
 
   findAll: async ({page, limit}) => await _findAll(page, limit),
 
@@ -100,6 +123,16 @@ const root = {
     await _findEpisode(animeID, episode),
   findEpisodes: async ({animeID}) => await _findEpisodes(animeID),
   findGenres: async () => await _findGenres(),
+
+  findAnimeInList: async ({animeId, userProfile})=> {
+    const find = await _findAnimeInList(animeId, userProfile);
+    return find;
+  },
+  findAnimesInList: async ({userProfile})=> {
+    const find = await _findAnimesInList(userProfile);
+    return find;
+  },
+
   findUser: async ({username}) => await _findUser(username),
   latestAnimesAdded: async () => await _latestAnimesAdded(),
   latestEpisodesAdded: async () => await _latestEpisodesAdded(),
