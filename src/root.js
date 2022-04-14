@@ -19,6 +19,8 @@ import _deleteAnime from './mutations/deleteAnime.js';
 
 import _deleteAnimeInList from './mutations/deleteAnimeInList.js';
 
+import _editUserProfile from './mutations/editUserProfile.js';
+
 import _findAll from './queries/findAll.js';
 
 import _findAllProfiles from './queries/findAllProfiles.js';
@@ -109,7 +111,7 @@ const root = {
       return '';
     }
   },
-
+  editUserProfile:async ({profileId,profileName,profileAvatar})=>await _editUserProfile(profileId,profileName,profileAvatar),
 
   findAll: async ({page, limit}) => await _findAll(page, limit),
 

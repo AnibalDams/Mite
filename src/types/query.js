@@ -1,8 +1,8 @@
 export default `
 		type Query {
-			animeRandom:anime
-
 			animeAndGenreRandom:animeAndGenre
+
+			animeRandom:anime
 		    
 		    findAll(page:Int!, limit:Int!):[anime]
 		    
@@ -12,14 +12,15 @@ export default `
 		    
 		    findAnimeByGenre(genre:String!):[anime]
 
+		    findAnimeInList(animeId:String!,userProfile:String!):animeList
+		    
+		    findAnimesInList(userProfile:String!):[animeList]
+
 		    findEpisode(animeID:String!, episode:Int!):episode
 		    
 		    findEpisodes(animeID:String!):[episode]
 		    
 		    findGenres:[genres]
-
-		    findAnimeInList(animeId:String!,userProfile:String!):animeList
-		    findAnimesInList(userProfile:String!):[animeList]
 		    
 		    latestAnimesAdded:[anime]
 		    

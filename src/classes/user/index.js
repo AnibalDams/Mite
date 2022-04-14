@@ -1,3 +1,4 @@
+import _editUserProfile from './staticMethods/editUserProfile.js'
 import _findAllProfiles from './staticMethods/findAllProfiles.js';
 import _login from './methods/login.js';
 import _newProfile from './staticMethods/newProfile.js';
@@ -29,7 +30,16 @@ class User {
     this.#password = password;
   }
 
-
+  static async editUserProfile(profileId,profileName,profileAvatar) {
+    try{
+      const edit = await editUserProfile(profileId,profileName,profileAvatar)
+      return edit
+    }catch(e){
+      console.error(e)
+      throw new Error(e)
+    }
+  }
+  
   static async findAllProfiles(user) {
     try {
       const find = await _findAllProfiles(user);
