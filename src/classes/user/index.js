@@ -32,7 +32,7 @@ class User {
 
   static async editUserProfile(profileId,profileName,profileAvatar) {
     try{
-      const edit = await editUserProfile(profileId,profileName,profileAvatar)
+      const edit = await _editUserProfile(profileId,profileName,profileAvatar)
       return edit
     }catch(e){
       console.error(e)
