@@ -8,6 +8,8 @@ export default `
 		    deleteAnime(animeId:String!,secretKey:String!) : String
 		    
 		    deleteAnimeInList(animeId:String!,secretKey:String!) : String
+
+		    deleteUserProfile(profileId:String!) : String
 		    
 		    editUserProfile(profileId:String!,profileName:String!,profileAvatar:String!) : String
 

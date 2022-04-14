@@ -1,3 +1,4 @@
+import _deleteUserProfile from './staticMethods/deleteUserProfile.js'
 import _editUserProfile from './staticMethods/editUserProfile.js'
 import _findAllProfiles from './staticMethods/findAllProfiles.js';
 import _login from './methods/login.js';
@@ -29,7 +30,16 @@ class User {
     this.#username = username;
     this.#password = password;
   }
-
+static async deleteUserProfile(profileId) {
+    try{
+      const _delete = await _deleteUserProfile(profileId)
+      return _delete
+    }catch(e){
+      console.error(e)
+      throw new Error(e)
+    }
+  }
+  
   static async editUserProfile(profileId,profileName,profileAvatar) {
     try{
       const edit = await _editUserProfile(profileId,profileName,profileAvatar)
