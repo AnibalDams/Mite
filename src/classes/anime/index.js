@@ -78,6 +78,7 @@ class Anime {
   #cover;
   #releaseDate;
   #study;
+  #characters;
   #onGoing;
   #genres;
   #type;
@@ -104,6 +105,7 @@ class Anime {
       cover,
       releaseDate,
       study,
+      characters,
       onGoing,
       genres,
       type,
@@ -116,6 +118,7 @@ class Anime {
     this.#cover = cover;
     this.#releaseDate = releaseDate;
     this.#study = study;
+    this.#characters = characters
     this.#onGoing = onGoing;
     this.#genres = genres;
     this.#type = type;
@@ -145,6 +148,7 @@ class Anime {
         this.#cover,
         this.#releaseDate,
         this.#study,
+        this.#characters,
         this.#onGoing,
         this.#genres,
         this.#type,

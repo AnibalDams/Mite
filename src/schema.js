@@ -6,6 +6,8 @@ import animeType from './types/anime.js';
 import episodeType from './types/episodes.js';
 import episodeServerType from './types/episodeServer.js';
 import episodeServerInput from './types/episodeServerInput.js';
+import characters from './types/characters.js';
+import charactersInput from './types/charactersInput.js';
 import genresType from './types/genres.js';
 import mutation from './types/mutation.js';
 import query from './types/query.js';
@@ -29,6 +31,10 @@ const schema = buildSchema(`
   ${episodeServerType}
   
   ${episodeServerInput}
+
+  ${charactersInput}
+
+  ${characters}
   
   ${userType}
   

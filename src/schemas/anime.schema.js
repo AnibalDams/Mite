@@ -9,6 +9,7 @@ const animeSchema = new Schema({
   color: String,
   image: String,
   cover: String,
+  characters:{type:[{name:String, role:String,image:String}]},
   releaseDate: String,
   study: String,
   onGoing: {type: Boolean},

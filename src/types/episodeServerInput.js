@@ -1,8 +1,8 @@
 export default `
 		  
   input episodeServerInput{
-    name:String
-    url:String
+    name:String!
+    url:String!
   }
 
 		

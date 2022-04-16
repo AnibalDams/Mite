@@ -23,6 +23,7 @@ export default `
 		      cover:String!, 
 		      releaseDate:String!, 
 		      study:String!, 
+		      characters:[characterInput]!,
 		      onGoing:Boolean!, 
 		      genres:[String]!, 
 		      type:String!, 
