@@ -9,7 +9,7 @@ export default `
         cover:String
         releaseDate:String
         study:String
-        characters:[characters]
+        characters:[character]
         onGoing:Boolean
         genres:[String]
         type:String

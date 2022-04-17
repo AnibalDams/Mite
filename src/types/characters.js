@@ -1,6 +1,6 @@
 export default `
 		  
-  type characterInput{
+  type character{
     name:String!
     role:String!
     image:String!
