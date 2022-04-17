@@ -22,8 +22,8 @@ export default `
 		      image:String!, 
 		      cover:String!, 
 		      releaseDate:String!, 
-		      study:String!, 
-		      characters:[characterInput]!,
+		      study:String!,
+		      characters:[characterInput]
 		      onGoing:Boolean!, 
 		      genres:[String]!, 
 		      type:String!, 
