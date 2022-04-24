@@ -100,7 +100,6 @@ class Anime {
   constructor(
       name,
       synopsis,
-      color,
       image,
       cover,
       releaseDate,
@@ -113,7 +112,6 @@ class Anime {
   ) {
     this.#name = name;
     this.#synopsis = synopsis;
-    this.#color = color;
     this.#image = image;
     this.#cover = cover;
     this.#releaseDate = releaseDate;
@@ -143,7 +141,7 @@ class Anime {
     const _new = newAnime(
         this.#name,
         this.#synopsis,
-        this.#color,
+        
         this.#image,
         this.#cover,
         this.#releaseDate,

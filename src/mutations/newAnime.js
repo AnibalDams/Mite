@@ -3,7 +3,6 @@ import Anime from '../classes/anime/index.js';
 const newAnime = async (
     name,
     synopsis,
-    color,
     image,
     cover,
     releaseDate,
@@ -16,7 +15,6 @@ const newAnime = async (
   const anime = new Anime(
       name,
       synopsis,
-      color,
       image,
       cover,
       releaseDate,

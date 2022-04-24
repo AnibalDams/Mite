@@ -18,12 +18,11 @@ export default `
 		    newAnime( 
 		      name:String!, 
 		      synopsis:String!, 
-		      color:String!, 
 		      image:String!, 
 		      cover:String!, 
 		      releaseDate:String!, 
 		      study:String!,
-		      characters:[characterInput]
+		      characters:[characterInput],
 		      onGoing:Boolean!, 
 		      genres:[String]!, 
 		      type:String!, 

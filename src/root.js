@@ -156,7 +156,6 @@ const root = {
   newAnime: async ({
     name,
     synopsis,
-    color,
     image,
     cover,
     releaseDate,
@@ -172,7 +171,6 @@ const root = {
       const New = await newanime(
           name,
           synopsis,
-          color,
           image,
           cover,
           releaseDate,
