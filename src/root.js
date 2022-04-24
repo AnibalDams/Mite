@@ -98,7 +98,7 @@ const root = {
   deleteAnime: async ({animeId, secretKey}) =>{
     if (secretKey === process.env.SERCRETKEY) {
       const _delete = await _deleteAnime(animeId);
-      return _delete 
+      return _delete;
     } else {
       return '';
     }
@@ -107,15 +107,14 @@ const root = {
   deleteAnimeInList: async ({animeId, secretKey}) =>{
     if (secretKey === process.env.SERCRETKEY) {
       const _delete = await _deleteAnimeInList(animeId);
-      return _delete
+      return _delete;
     } else {
-
       return '';
     }
   },
-  deleteUserProfile:async ({profileId})=>await _deleteUserProfile(profileId),
-  
-  editUserProfile:async ({profileId,profileName,profileAvatar})=>await _editUserProfile(profileId,profileName,profileAvatar),
+  deleteUserProfile: async ({profileId})=>await _deleteUserProfile(profileId),
+
+  editUserProfile: async ({profileId, profileName, profileAvatar})=>await _editUserProfile(profileId, profileName, profileAvatar),
 
   findAll: async ({page, limit}) => await _findAll(page, limit),
 

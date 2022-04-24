@@ -62,9 +62,28 @@ class Anime {
 		this.type = type 
 		return this
 	}
-	setPrivate(private) {
-		this.private = private 
+	setPrivate(_private) {
+		this.private = _private 
 		return this
+	}
+	getData(){
+		return {
+			id:this.id,
+			name:this.name,
+			synopsis:this.synopsis,
+			image:this.image,
+			cover:this.cover,
+			releaseDate:this.releaseDate,
+			study: this.study,
+			characters: this.characters,
+			onGoing:this.onGoing,
+			genres:this.genres,
+			type:this.type,
+			Private:this.Private
+		}
 	}
 
 }
+
+
+export default Anime

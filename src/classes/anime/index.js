@@ -116,7 +116,7 @@ class Anime {
     this.#cover = cover;
     this.#releaseDate = releaseDate;
     this.#study = study;
-    this.#characters = characters
+    this.#characters = characters;
     this.#onGoing = onGoing;
     this.#genres = genres;
     this.#type = type;
@@ -141,7 +141,7 @@ class Anime {
     const _new = newAnime(
         this.#name,
         this.#synopsis,
-        
+
         this.#image,
         this.#cover,
         this.#releaseDate,
