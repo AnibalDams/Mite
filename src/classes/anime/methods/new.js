@@ -5,7 +5,7 @@ import {v4} from 'uuid';
 const _newAnime = async (
     name,
     synopsis,
-    
+
     image,
     cover,
     releaseDate,
@@ -22,7 +22,7 @@ const _newAnime = async (
       id,
       name,
       synopsis,
-      
+
       image,
       cover,
       releaseDate,
@@ -33,7 +33,7 @@ const _newAnime = async (
       type,
       private: Private,
     });
-    
+
     genres.forEach(async (el) => {
       const findGenre = await Genre.findOne({genre: el});
       if (findGenre) {

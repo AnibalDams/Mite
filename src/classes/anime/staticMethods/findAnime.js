@@ -9,7 +9,7 @@ import anime from '../../../schemas/anime.schema.js';
 const _findAnime = async (animeID) => {
   try {
     const Anime = await anime.findOne({id: animeID, private: false});
-    console.log(Anime);
+
 
     if (Anime) {
       await anime.findByIdAndUpdate(Anime._id, {

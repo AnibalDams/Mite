@@ -27,7 +27,7 @@ import _findAll from './queries/findAll.js';
 
 import _findAllProfiles from './queries/findAllProfiles.js';
 
-import _findAnime from './queries/findAnime.js';
+import findAnime from './methods/findAnime.js';
 
 import _findAnimeByGenre from './queries/findAnimeByGenre.js';
 
@@ -120,7 +120,7 @@ const root = {
 
   findAllProfiles: async ({user}) => await _findAllProfiles(user),
 
-  findAnime: async ({animeID}) => await _findAnime(animeID),
+  findAnime,
 
   findAnimeByGenre: async ({genre}) => await _findAnimeByGenre(genre),
 
